@@ -17,19 +17,19 @@ const formattedDate = publishedAt.toLocaleDateString('en-ZW', {
 });
 
 const categoryColors: Record<string, string> = {
-  Strategy: 'var(--color-violet)',
-  Content: 'var(--color-magenta)',
+  Strategy:    'var(--color-violet)',
+  Content:     'var(--color-magenta)',
   Advertising: 'var(--color-cyan)',
-  Web: '#22d3ee',
-  Automation: '#a78bfa',
-  General: 'var(--color-muted)',
+  Web:         'var(--color-cyan)',
+  Automation:  'var(--color-violet)',
+  General:     'var(--color-muted)',
 };
 
 const categoryColor = categoryColors[category] ?? 'var(--color-muted)';
 ---
 
 <article
-  class="blog-card reveal"
+  class="blog-card"
   data-category={category}
   style={`--delay: ${index * 80}ms`}
 >
@@ -60,6 +60,9 @@ const categoryColor = categoryColors[category] ?? 'var(--color-muted)';
     backdrop-filter: var(--glass-blur);
     box-shadow: var(--glass-shadow);
     overflow: hidden;
+    opacity: 0;
+    animation: card-in 0.5s var(--ease-spring) forwards;
+    animation-delay: var(--delay, 0ms);
     transition:
       transform var(--duration-base) var(--ease-spring),
       box-shadow var(--duration-base) var(--ease-spring),
@@ -69,13 +72,17 @@ const categoryColor = categoryColors[category] ?? 'var(--color-muted)';
     outline-offset: -1px;
   }
 
+  @keyframes card-in {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
   /* Fallback for browsers without backdrop-filter */
   @supports not (backdrop-filter: blur(1px)) {
     .blog-card {
       background: rgb(16 10 28 / 94%);
     }
   }
-
   .blog-card__glow {
     position: absolute;
     inset: 0;

@@ -99,7 +99,7 @@ const auditUrl = buildWhatsAppUrl();
           <BlogCard post={post} index={i} />
         ))}
       </div>
-      <p class="blog-empty" id="blog-empty" aria-live="polite">No posts in this category yet.</p>
+      <p class="blog-empty" id="blog-empty" aria-live="polite" hidden>No posts in this category yet.</p>
     </div>
   </section>
 
@@ -247,16 +247,12 @@ const auditUrl = buildWhatsAppUrl();
     display: none;
   }
 
-  .blog-empty {
-    display: none;
+  #blog-empty:not([hidden]) {
+    display: block;
     text-align: center;
     color: var(--color-muted);
     padding-block: var(--space-8);
     font-size: 1rem;
-  }
-
-  .blog-empty.visible {
-    display: block;
   }
 
   /* ══════════════════════════════════════════
@@ -351,7 +347,7 @@ const auditUrl = buildWhatsAppUrl();
         if (show) visibleCount++;
       });
       if (emptyMsg) {
-        emptyMsg.classList.toggle('visible', visibleCount === 0);
+        emptyMsg.hidden = visibleCount > 0;
       }
     });
   });
