@@ -2,31 +2,55 @@
 import '../styles/global.css';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
-import { PHONE_E164, SITE_NAME, siteMetadata } from '../data/site';
+import { PHONE_E164, SITE_NAME, SITE_TAGLINE, siteMetadata } from '../data/site';
 import { services } from '../data/services';
 
 interface Props {
 	title: string;
 	description?: string;
+	/** Absolute path from /public, e.g. '/brand/social-card.svg' */
 	image?: string;
+	/** Set to false on pages that shouldn't be indexed (e.g. 404) */
+	noindex?: boolean;
 }
 
-const { title, description = siteMetadata.description, image = '/brand/social-card.svg' } = Astro.props;
+const {
+	title,
+	description = siteMetadata.description,
+	image = '/brand/social-card.svg',
+	noindex = false,
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://menaceworldtech.com';
 const pageTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
-const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
-const socialImageUrl = Astro.site ? new URL(image, Astro.site) : undefined;
+const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
+const socialImageUrl = `${siteUrl}${image}`;
 const pathname = Astro.url.pathname;
+
 const structuredData = {
 	'@context': 'https://schema.org',
-	'@type': 'ProfessionalService',
+	'@type': 'LocalBusiness',
+	'@id': `${siteUrl}/#business`,
 	name: SITE_NAME,
 	description: siteMetadata.description,
+	slogan: SITE_TAGLINE,
+	url: siteUrl,
+	logo: `${siteUrl}/logo.webp`,
+	image: socialImageUrl,
 	telephone: PHONE_E164,
-	areaServed: {
-		'@type': 'Country',
-		name: 'Zimbabwe',
+	areaServed: [
+		{ '@type': 'Country', name: 'Zimbabwe' },
+	],
+	address: {
+		'@type': 'PostalAddress',
+		addressCountry: 'ZW',
 	},
-	serviceType: services.map((service) => service.title),
+	serviceType: services.map((s) => s.title),
+	sameAs: [],
+	potentialAction: {
+		'@type': 'ContactPage',
+		url: `${siteUrl}/contact`,
+	},
 };
 ---
 
@@ -37,21 +61,40 @@ const structuredData = {
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="theme-color" content="#05030A" />
-		<meta name="description" content={description} />
+
+		<!-- Primary SEO -->
 		<title>{pageTitle}</title>
+		<meta name="description" content={description} />
+		{noindex
+			? <meta name="robots" content="noindex, nofollow" />
+			: <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+		}
+		<link rel="canonical" href={canonicalUrl} />
+
+		<!-- Favicon -->
 		<link rel="icon" type="image/webp" href="/logo.webp" />
-		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+		<link rel="apple-touch-icon" href="/logo.webp" />
+
+		<!-- Open Graph -->
 		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={SITE_NAME} />
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:locale" content={siteMetadata.locale} />
-		<meta property="og:site_name" content={SITE_NAME} />
-		{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
-		{socialImageUrl && <meta property="og:image" content={socialImageUrl} />}
+		<meta property="og:image" content={socialImageUrl} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={`${SITE_NAME} — ${SITE_TAGLINE}`} />
+
+		<!-- Twitter / X card -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={pageTitle} />
 		<meta name="twitter:description" content={description} />
-		{socialImageUrl && <meta name="twitter:image" content={socialImageUrl} />}
+		<meta name="twitter:image" content={socialImageUrl} />
+		<meta name="twitter:image:alt" content={`${SITE_NAME} — ${SITE_TAGLINE}`} />
+
+		<!-- Structured data -->
 		<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
 	</head>
 	<body>
