@@ -9,8 +9,8 @@ const { steps } = Astro.props;
 ---
 
 <ol class="process">
-	{steps.map((step) => (
-		<li>
+	{steps.map((step, i) => (
+		<li class="process__item" style={`--delay: ${i * 80}ms`}>
 			<span class="process__number">{step.number}</span>
 			<div>
 				<h3>{step.title}</h3>
@@ -25,21 +25,35 @@ const { steps } = Astro.props;
 		display: grid;
 		padding: 0;
 		margin: 0;
-		counter-reset: process;
 		list-style: none;
 	}
 
-	.process li {
+	.process__item {
 		position: relative;
 		display: grid;
 		grid-template-columns: 3.25rem 1fr;
 		gap: var(--space-4);
 		padding-block: var(--space-5);
-		border-top: var(--border);
+		border-top: 1px solid rgb(247 245 255 / 8%);
+		transition: background var(--duration-base) var(--ease-out);
 	}
 
-	.process li:last-child {
-		border-bottom: var(--border);
+	.process__item:last-child {
+		border-bottom: 1px solid rgb(247 245 255 / 8%);
+	}
+
+	.process__item::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(90deg, rgb(124 33 245 / 6%), transparent 60%);
+		opacity: 0;
+		transition: opacity var(--duration-base) var(--ease-out);
+		pointer-events: none;
+	}
+
+	.process__item:hover::before {
+		opacity: 1;
 	}
 
 	.process__number {
@@ -61,18 +75,22 @@ const { steps } = Astro.props;
 	@media (min-width: 50rem) {
 		.process {
 			grid-template-columns: repeat(4, 1fr);
-			border-block: var(--border);
+			border-block: 1px solid rgb(247 245 255 / 8%);
 		}
 
-		.process li,
-		.process li:last-child {
+		.process__item,
+		.process__item:last-child {
 			display: block;
 			padding: var(--space-6);
 			border: 0;
-			border-right: var(--border);
+			border-right: 1px solid rgb(247 245 255 / 8%);
 		}
 
-		.process li:last-child {
+		.process__item::before {
+			background: linear-gradient(180deg, rgb(124 33 245 / 6%), transparent 60%);
+		}
+
+		.process__item:last-child {
 			border-right: 0;
 		}
 

@@ -10,6 +10,7 @@ const { packageTier, featured = false } = Astro.props;
 ---
 
 <article class:list={['package-card', { 'package-card--featured': featured }]}>
+	{featured && <div class="package-card__featured-glow" aria-hidden="true"></div>}
 	<p class="package-card__label">{packageTier.label}</p>
 	<h3>{packageTier.name}</h3>
 	<div class="package-card__price">
@@ -26,17 +27,61 @@ const { packageTier, featured = false } = Astro.props;
 
 <style>
 	.package-card {
+		position: relative;
 		display: grid;
 		gap: var(--space-4);
 		padding: var(--space-5);
-		border: var(--border);
-		border-radius: var(--radius-sm);
-		background: var(--color-raised);
+		border: var(--border-glass);
+		border-radius: var(--radius-md);
+		background: var(--glass-bg);
+		-webkit-backdrop-filter: var(--glass-blur);
+		backdrop-filter: var(--glass-blur);
+		box-shadow: var(--glass-shadow);
+		overflow: hidden;
+		transition:
+			transform var(--duration-base) var(--ease-spring),
+			box-shadow var(--duration-base) var(--ease-spring),
+			border-color var(--duration-base) var(--ease-spring);
+	}
+
+	@supports not (backdrop-filter: blur(1px)) {
+		.package-card {
+			background: rgb(16 10 28 / 94%);
+		}
+	}
+
+	.package-card:hover {
+		transform: translateY(-5px);
+		box-shadow: var(--glass-shadow-hover);
+		border-color: rgb(247 245 255 / 14%);
 	}
 
 	.package-card--featured {
-		border-color: rgb(242 14 207 / 50%);
-		box-shadow: 0 0 2rem rgb(242 14 207 / 10%);
+		border-color: rgb(242 14 207 / 40%);
+		box-shadow: var(--glass-shadow), 0 0 2.5rem rgb(242 14 207 / 12%);
+		background: rgb(20 10 30 / 70%);
+	}
+
+	.package-card--featured:hover {
+		box-shadow: var(--glass-shadow-hover), 0 0 3.5rem rgb(242 14 207 / 20%);
+		border-color: rgb(242 14 207 / 65%);
+	}
+
+	.package-card__featured-glow {
+		position: absolute;
+		top: -3rem;
+		right: -3rem;
+		width: 10rem;
+		height: 10rem;
+		border-radius: 50%;
+		background: radial-gradient(circle, rgb(242 14 207 / 22%) 0%, transparent 70%);
+		pointer-events: none;
+		animation: pulse-glow 3s ease-in-out infinite alternate;
+	}
+
+	@keyframes pulse-glow {
+		from { opacity: 0.7; transform: scale(0.95); }
+		to   { opacity: 1;   transform: scale(1.1); }
 	}
 
 	.package-card__label {
@@ -47,12 +92,16 @@ const { packageTier, featured = false } = Astro.props;
 		text-transform: uppercase;
 	}
 
+	.package-card--featured .package-card__label {
+		color: var(--color-magenta);
+	}
+
 	.package-card__price,
 	.package-card__spend {
 		display: grid;
 		gap: var(--space-1);
 		padding-top: var(--space-4);
-		border-top: var(--border);
+		border-top: 1px solid rgb(247 245 255 / 8%);
 	}
 
 	.package-card span,
@@ -73,10 +122,20 @@ const { packageTier, featured = false } = Astro.props;
 	.package-card > a {
 		align-self: end;
 		margin-top: var(--space-3);
-		color: var(--color-text);
+		color: var(--color-muted);
 		font-size: 0.75rem;
 		font-weight: 800;
 		letter-spacing: 0.06em;
+		text-decoration: none;
 		text-transform: uppercase;
+		transition: color var(--duration-fast) ease;
+	}
+
+	.package-card > a:hover {
+		color: var(--color-cyan);
+	}
+
+	.package-card--featured > a {
+		color: var(--color-text);
 	}
 </style>

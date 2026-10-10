@@ -79,9 +79,20 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
 		position: sticky;
 		top: 0;
 		z-index: 50;
-		border-bottom: 1px solid rgb(247 245 255 / 9%);
-		background: rgb(5 3 10 / 88%);
-		backdrop-filter: blur(18px);
+		border-bottom: 1px solid rgb(247 245 255 / 7%);
+		background: rgb(5 3 10 / 72%);
+		-webkit-backdrop-filter: blur(20px) saturate(160%);
+		backdrop-filter: blur(20px) saturate(160%);
+		box-shadow: 0 1px 0 rgb(247 245 255 / 5%) inset, 0 4px 24px rgb(0 0 0 / 30%);
+		transition: background var(--duration-base) var(--ease-out),
+		            box-shadow var(--duration-base) var(--ease-out);
+	}
+
+	/* Fallback */
+	@supports not (backdrop-filter: blur(1px)) {
+		.site-header {
+			background: rgb(5 3 10 / 97%);
+		}
 	}
 
 	.site-header__inner {
@@ -96,6 +107,11 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
 		position: relative;
 		z-index: 2;
 		text-decoration: none;
+		transition: opacity var(--duration-fast) ease;
+	}
+
+	.site-header__brand:hover {
+		opacity: 0.85;
 	}
 
 	.site-nav {
@@ -122,14 +138,17 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
 		letter-spacing: 0.04em;
 		text-decoration: none;
 		text-transform: uppercase;
+		border-radius: var(--radius-sm);
+		transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
 	}
 
-	.site-nav li a:hover,
+	.site-nav li a:hover {
+		color: var(--color-text);
+		background: rgb(247 245 255 / 5%);
+	}
+
 	.site-nav li a[aria-current='page'] {
 		color: var(--color-text);
-	}
-
-	.site-nav li a[aria-current='page'] {
 		text-decoration: underline;
 		text-decoration-color: var(--color-cyan);
 		text-decoration-thickness: 2px;
@@ -137,15 +156,28 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
 	}
 
 	.site-nav__cta {
-		padding: 0.65rem 0.85rem;
+		padding: 0.65rem 1rem;
 		border: 1px solid var(--color-border-strong);
 		border-radius: var(--radius-sm);
+		background: rgb(18 221 243 / 5%);
 		color: var(--color-text);
 		font-size: 0.72rem;
 		font-weight: 850;
 		letter-spacing: 0.05em;
 		text-decoration: none;
 		text-transform: uppercase;
+		transition: background var(--duration-base) var(--ease-spring),
+		            border-color var(--duration-base) var(--ease-spring),
+		            box-shadow var(--duration-base) var(--ease-spring),
+		            transform var(--duration-base) var(--ease-spring);
+	}
+
+	.site-nav__cta:hover {
+		background: rgb(18 221 243 / 12%);
+		border-color: var(--color-cyan);
+		box-shadow: 0 0 1.2rem rgb(18 221 243 / 22%);
+		transform: translateY(-1px);
+		color: var(--color-text);
 	}
 
 	.nav-toggle {
@@ -155,8 +187,16 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
 		padding: 0.75rem;
 		border: var(--border);
 		border-radius: var(--radius-sm);
-		background: var(--color-raised);
+		background: var(--glass-bg);
+		-webkit-backdrop-filter: var(--glass-blur);
+		backdrop-filter: var(--glass-blur);
 		color: var(--color-text);
+		transition: background var(--duration-fast) ease, border-color var(--duration-fast) ease;
+	}
+
+	.nav-toggle:hover {
+		background: rgb(124 33 245 / 15%);
+		border-color: rgb(124 33 245 / 40%);
 	}
 
 	.nav-toggle span:not(.sr-only) {
@@ -165,7 +205,7 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
 		height: 2px;
 		margin-block: 0.3rem;
 		background: currentColor;
-		transition: transform 180ms ease;
+		transition: transform var(--duration-base) var(--ease-spring);
 	}
 
 	@media (max-width: 49.99rem) {
@@ -173,6 +213,9 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
 			width: 100%;
 			align-items: stretch;
 			padding-bottom: var(--space-4);
+			background: rgb(5 3 10 / 92%);
+			-webkit-backdrop-filter: blur(20px);
+			backdrop-filter: blur(20px);
 		}
 
 		.site-nav,
@@ -189,6 +232,7 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
 		.site-nav li a {
 			padding: var(--space-3) 0;
 			border-bottom: var(--border);
+			border-radius: 0;
 		}
 
 		.site-header__inner {

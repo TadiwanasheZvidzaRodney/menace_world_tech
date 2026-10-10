@@ -9,7 +9,8 @@ interface Props {
 const { service, index = 0 } = Astro.props;
 ---
 
-<article class="service-card">
+<article class="service-card" style={`--delay: ${index * 60}ms`}>
+	<div class="service-card__glow" aria-hidden="true"></div>
 	<div class="service-card__top">
 		<span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
 		<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 25 25 5M13 5h12v12"></path></svg>
@@ -27,22 +28,55 @@ const { service, index = 0 } = Astro.props;
 		align-content: start;
 		gap: var(--space-4);
 		padding: clamp(var(--space-5), 4vw, var(--space-6));
-		border: var(--border);
-		border-radius: var(--radius-angular);
-		background: linear-gradient(145deg, rgb(16 10 28 / 94%), rgb(11 7 18 / 76%));
-		box-shadow: var(--glow-violet);
+		border: var(--border-glass);
+		border-radius: var(--radius-md);
+		background: var(--glass-bg);
+		-webkit-backdrop-filter: var(--glass-blur);
+		backdrop-filter: var(--glass-blur);
+		box-shadow: var(--glass-shadow);
 		overflow: hidden;
+		transition:
+			transform var(--duration-base) var(--ease-spring),
+			box-shadow var(--duration-base) var(--ease-spring),
+			border-color var(--duration-base) var(--ease-spring),
+			background var(--duration-base) var(--ease-spring);
+		/* Gradient border via outline trick */
+		outline: 1px solid rgb(124 33 245 / 18%);
+		outline-offset: -1px;
 	}
 
-	.service-card::after {
+	/* Fallback */
+	@supports not (backdrop-filter: blur(1px)) {
+		.service-card {
+			background: rgb(16 10 28 / 94%);
+		}
+	}
+
+	/* Ambient glow blob that moves with --x/--y on hover via JS */
+	.service-card__glow {
 		position: absolute;
-		right: -3rem;
-		bottom: -4rem;
-		width: 9rem;
-		height: 9rem;
-		border: 1px solid rgb(18 221 243 / 15%);
-		transform: rotate(35deg);
-		content: '';
+		inset: 0;
+		border-radius: inherit;
+		background: radial-gradient(
+			60% 60% at var(--gx, 50%) var(--gy, 80%),
+			rgb(124 33 245 / 12%) 0%,
+			transparent 70%
+		);
+		opacity: 0;
+		transition: opacity var(--duration-base) var(--ease-out);
+		pointer-events: none;
+	}
+
+	.service-card:hover {
+		transform: translateY(-6px);
+		background: var(--glass-bg-hover);
+		box-shadow: var(--glass-shadow-hover), var(--glow-violet);
+		border-color: rgb(124 33 245 / 35%);
+		outline-color: rgb(18 221 243 / 25%);
+	}
+
+	.service-card:hover .service-card__glow {
+		opacity: 1;
 	}
 
 	.service-card__top {
@@ -60,6 +94,11 @@ const { service, index = 0 } = Astro.props;
 		fill: none;
 		stroke: currentColor;
 		stroke-width: 1.5;
+		transition: transform var(--duration-base) var(--ease-spring);
+	}
+
+	.service-card:hover .service-card__top svg {
+		transform: translate(3px, -3px);
 	}
 
 	.service-card p {
@@ -77,5 +116,24 @@ const { service, index = 0 } = Astro.props;
 		letter-spacing: 0.08em;
 		text-decoration-color: var(--color-magenta);
 		text-transform: uppercase;
+		transition: color var(--duration-fast) ease, text-decoration-color var(--duration-fast) ease;
+	}
+
+	.service-card:hover > a {
+		color: var(--color-cyan);
+		text-decoration-color: var(--color-cyan);
 	}
 </style>
+
+<script>
+	// Cursor-tracked glow
+	document.querySelectorAll<HTMLElement>('.service-card').forEach((card) => {
+		card.addEventListener('mousemove', (e) => {
+			const rect = card.getBoundingClientRect();
+			const x = ((e.clientX - rect.left) / rect.width) * 100;
+			const y = ((e.clientY - rect.top) / rect.height) * 100;
+			card.style.setProperty('--gx', `${x}%`);
+			card.style.setProperty('--gy', `${y}%`);
+		});
+	});
+</script>

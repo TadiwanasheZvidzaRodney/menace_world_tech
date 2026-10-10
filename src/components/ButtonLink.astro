@@ -23,21 +23,31 @@ const { href, variant = 'primary', class: className, ariaLabel } = Astro.props;
 		align-items: center;
 		justify-content: center;
 		gap: var(--space-3);
-		padding: 0.75rem 1.1rem;
+		padding: 0.75rem 1.25rem;
 		border: 1px solid transparent;
 		border-radius: var(--radius-sm);
 		font-size: 0.82rem;
 		font-weight: 850;
-		letter-spacing: 0.04em;
+		letter-spacing: 0.05em;
 		line-height: 1.2;
 		text-decoration: none;
 		text-transform: uppercase;
-		transition: color 180ms ease, background 180ms ease, border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+		transition:
+			color var(--duration-base) var(--ease-spring),
+			background var(--duration-base) var(--ease-spring),
+			border-color var(--duration-base) var(--ease-spring),
+			box-shadow var(--duration-base) var(--ease-spring),
+			transform var(--duration-base) var(--ease-spring);
 	}
 
 	.button:hover {
-		transform: translateY(-2px);
+		transform: translateY(-3px);
 		color: var(--color-text);
+	}
+
+	.button:active {
+		transform: translateY(0);
+		transition-duration: var(--duration-fast);
 	}
 
 	.button svg {
@@ -46,33 +56,55 @@ const { href, variant = 'primary', class: className, ariaLabel } = Astro.props;
 		stroke: currentColor;
 		stroke-linecap: square;
 		stroke-width: 1.8;
+		flex-shrink: 0;
+		transition: transform var(--duration-base) var(--ease-spring);
 	}
 
+	.button:hover svg {
+		transform: translateX(3px);
+	}
+
+	/* ── Primary ── */
 	.button--primary {
-		background: linear-gradient(110deg, var(--color-violet), var(--color-magenta));
-		box-shadow: 0 0 1.5rem rgb(124 33 245 / 22%);
+		background: linear-gradient(110deg, var(--color-violet) 0%, var(--color-magenta) 100%);
+		box-shadow: 0 0 1.5rem rgb(124 33 245 / 25%), 0 1px 0 rgb(247 245 255 / 15%) inset;
 		color: var(--color-text);
 	}
 
 	.button--primary:hover {
-		box-shadow: 0 0 2rem rgb(242 14 207 / 30%);
+		background: linear-gradient(110deg, #9035ff 0%, #ff20e0 100%);
+		box-shadow: 0 0 2.5rem rgb(242 14 207 / 40%), 0 1px 0 rgb(247 245 255 / 20%) inset;
 	}
 
+	/* ── Secondary (glass) ── */
 	.button--secondary {
-		border-color: var(--color-border-strong);
-		background: rgb(16 10 28 / 72%);
+		border-color: rgb(18 221 243 / 30%);
+		background: rgb(18 221 243 / 5%);
+		-webkit-backdrop-filter: blur(8px);
+		backdrop-filter: blur(8px);
 		color: var(--color-text);
 	}
 
 	.button--secondary:hover {
 		border-color: var(--color-cyan);
-		background: rgb(18 221 243 / 7%);
+		background: rgb(18 221 243 / 12%);
+		box-shadow: 0 0 1.5rem rgb(18 221 243 / 20%);
 	}
 
+	/* ── Text ── */
 	.button--text {
 		min-height: auto;
 		justify-content: flex-start;
 		padding: 0;
 		color: var(--color-cyan);
+	}
+
+	.button--text:hover {
+		transform: none;
+		color: var(--color-text);
+	}
+
+	.button--text:hover svg {
+		transform: translateX(4px);
 	}
 </style>

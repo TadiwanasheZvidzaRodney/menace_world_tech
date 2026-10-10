@@ -6,7 +6,6 @@ import ProcessSteps from '../components/ProcessSteps.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import CampaignShowcase from '../components/visuals/CampaignShowcase.astro';
-import HeroDimension from '../components/visuals/HeroDimension.astro';
 import { capabilityStrip, processSteps } from '../data/site';
 import { featuredServices } from '../data/services';
 import { packageTiers, pricingNote } from '../data/packages';
@@ -46,8 +45,50 @@ const handlingAreas = [
 	title="Menace World Tech"
 	description="Zimbabwe's growth partner for small business: practical strategy, content, advertising, web, automation, and transparent reporting."
 >
+	<!-- ── Hero ── -->
 	<section class="hero">
-		<div class="container hero__grid">
+		<div class="hero__bg" aria-hidden="true">
+			<svg class="hero__bg-svg" viewBox="0 0 1200 680" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+				<defs>
+					<radialGradient id="orb-v" cx="50%" cy="50%" r="50%">
+						<stop offset="0%" stop-color="#7c21f5" stop-opacity="0.4"/>
+						<stop offset="100%" stop-color="#7c21f5" stop-opacity="0"/>
+					</radialGradient>
+					<radialGradient id="orb-m" cx="50%" cy="50%" r="50%">
+						<stop offset="0%" stop-color="#f20ecf" stop-opacity="0.32"/>
+						<stop offset="100%" stop-color="#f20ecf" stop-opacity="0"/>
+					</radialGradient>
+					<radialGradient id="orb-c" cx="50%" cy="50%" r="50%">
+						<stop offset="0%" stop-color="#12ddf3" stop-opacity="0.26"/>
+						<stop offset="100%" stop-color="#12ddf3" stop-opacity="0"/>
+					</radialGradient>
+				</defs>
+				<g stroke="#f7f5ff" stroke-opacity="0.04">
+					<line x1="0" y1="120" x2="1200" y2="120"/>
+					<line x1="0" y1="240" x2="1200" y2="240"/>
+					<line x1="0" y1="360" x2="1200" y2="360"/>
+					<line x1="0" y1="480" x2="1200" y2="480"/>
+					<line x1="0" y1="600" x2="1200" y2="600"/>
+					<line x1="200" y1="0" x2="200" y2="680"/>
+					<line x1="400" y1="0" x2="400" y2="680"/>
+					<line x1="600" y1="0" x2="600" y2="680"/>
+					<line x1="800" y1="0" x2="800" y2="680"/>
+					<line x1="1000" y1="0" x2="1000" y2="680"/>
+				</g>
+				<ellipse class="orb orb--v" cx="180"  cy="200" rx="380" ry="300" fill="url(#orb-v)"/>
+				<ellipse class="orb orb--m" cx="1020" cy="440" rx="320" ry="260" fill="url(#orb-m)"/>
+				<ellipse class="orb orb--c" cx="680"  cy="100" rx="240" ry="200" fill="url(#orb-c)"/>
+				<circle class="dot d1" cx="130"  cy="90"  r="2.5" fill="#7c21f5"/>
+				<circle class="dot d2" cx="470"  cy="430" r="2"   fill="#f20ecf"/>
+				<circle class="dot d3" cx="830"  cy="150" r="3"   fill="#12ddf3"/>
+				<circle class="dot d4" cx="1080" cy="320" r="2"   fill="#7c21f5"/>
+				<circle class="dot d5" cx="300"  cy="540" r="2.5" fill="#12ddf3"/>
+				<circle class="dot d6" cx="660"  cy="560" r="2"   fill="#f20ecf"/>
+				<circle class="dot d7" cx="950"  cy="80"  r="2"   fill="#12ddf3"/>
+			</svg>
+		</div>
+
+		<div class="container">
 			<div class="hero__content">
 				<p class="eyebrow">Zimbabwe's growth partner for small business.</p>
 				<h1>Turn your social media into a <span class="gradient-text">customer-generating machine.</span></h1>
@@ -58,10 +99,10 @@ const handlingAreas = [
 				</div>
 				<p class="hero__note"><span aria-hidden="true"></span> Local context. Clear next steps. No guaranteed outcomes.</p>
 			</div>
-			<HeroDimension />
 		</div>
 	</section>
 
+	<!-- ── Capabilities strip ── -->
 	<section class="capabilities" aria-label="Capabilities">
 		<div class="container">
 			<p>Built for the full growth loop</p>
@@ -71,7 +112,8 @@ const handlingAreas = [
 		</div>
 	</section>
 
-	<section class="section" id="services">
+	<!-- ── Services ── -->
+	<section class="section reveal-section" id="services">
 		<div class="container">
 			<SectionHeading
 				eyebrow="Connected capabilities"
@@ -85,7 +127,8 @@ const handlingAreas = [
 		</div>
 	</section>
 
-	<section class="section section--raised" id="how-we-work">
+	<!-- ── How we work ── -->
+	<section class="section section--raised reveal-section" id="how-we-work">
 		<div class="container handling">
 			<div class="handling__intro">
 				<p class="eyebrow">One connected workflow</p>
@@ -94,7 +137,7 @@ const handlingAreas = [
 			</div>
 			<ol class="handling__grid">
 				{handlingAreas.map((area, index) => (
-					<li class:list={{ 'handling__item--wide': index === 0 || index === 4 }}>
+					<li class:list={['handling__item', { 'handling__item--wide': index === 0 || index === 4 }]} style={`--delay: ${index * 70}ms`}>
 						<span>{area.number}</span>
 						<h3>{area.title}</h3>
 						<p>{area.description}</p>
@@ -104,7 +147,8 @@ const handlingAreas = [
 		</div>
 	</section>
 
-	<section class="section" id="process">
+	<!-- ── Process ── -->
+	<section class="section reveal-section" id="process">
 		<div class="container">
 			<SectionHeading
 				eyebrow="A practical growth loop"
@@ -115,7 +159,8 @@ const handlingAreas = [
 		</div>
 	</section>
 
-	<section class="section packages" id="packages">
+	<!-- ── Packages ── -->
+	<section class="section packages reveal-section" id="packages">
 		<div class="container">
 			<SectionHeading
 				eyebrow="Flexible starting points"
@@ -132,7 +177,8 @@ const handlingAreas = [
 		</div>
 	</section>
 
-	<section class="section section--raised concept" id="concept-creative">
+	<!-- ── Concept creative ── -->
+	<section class="section section--raised concept reveal-section" id="concept-creative">
 		<div class="container concept__grid">
 			<div class="concept__content">
 				<p class="eyebrow">Concept creative / not client work</p>
@@ -144,10 +190,11 @@ const handlingAreas = [
 		</div>
 	</section>
 
-	<section class="section final-cta">
+	<!-- ── Final CTA ── -->
+	<section class="section final-cta reveal-section">
 		<div class="container final-cta__inner">
 			<p class="eyebrow">Your next dimension starts with clarity</p>
-			<h2>Let’s find the practical growth opportunities already in front of your business.</h2>
+			<h2>Let's find the practical growth opportunities already in front of your business.</h2>
 			<p>Start with a free growth audit and a straightforward conversation about what could make sense next.</p>
 			<ButtonLink href={auditUrl}>Get a free growth audit</ButtonLink>
 		</div>
@@ -155,48 +202,89 @@ const handlingAreas = [
 </BaseLayout>
 
 <style>
+	/* ══════════════════════════════════════════
+	   HERO
+	══════════════════════════════════════════ */
 	.hero {
 		position: relative;
-		padding-block: clamp(var(--space-7), 8vw, var(--space-9));
+		padding-block: clamp(var(--space-8), 13vw, var(--space-10));
+		overflow: hidden;
 	}
 
-	.hero::before {
+	.hero__bg {
 		position: absolute;
-		top: 8%;
-		left: -12rem;
-		width: 25rem;
-		height: 25rem;
-		border: 1px solid rgb(124 33 245 / 15%);
-		transform: rotate(38deg);
-		content: '';
+		inset: 0;
+		pointer-events: none;
+		z-index: 0;
 	}
 
-	.hero__grid {
-		position: relative;
-		display: grid;
-		align-items: center;
-		gap: clamp(var(--space-7), 7vw, var(--space-9));
+	.hero__bg-svg {
+		width: 100%;
+		height: 100%;
 	}
 
+	/* orb drift */
+	.orb { transform-box: fill-box; transform-origin: center; }
+	.orb--v { animation: drift-v 14s ease-in-out infinite alternate; }
+	.orb--m { animation: drift-m 18s ease-in-out infinite alternate; }
+	.orb--c { animation: drift-c 11s ease-in-out infinite alternate; }
+
+	@keyframes drift-v {
+		from { transform: translate(0, 0) scale(1);    }
+		to   { transform: translate(-24px, 28px) scale(0.93); }
+	}
+	@keyframes drift-m {
+		from { transform: translate(0, 0) scale(1);    }
+		to   { transform: translate(28px, -32px) scale(1.1); }
+	}
+	@keyframes drift-c {
+		from { transform: translate(0, 0) scale(1);    }
+		to   { transform: translate(-20px, 18px) scale(1.06); }
+	}
+
+	/* floating dots */
+	.dot { animation: float-dot ease-in-out infinite alternate; opacity: 0.7; }
+	.d1 { animation-duration: 6s;    animation-delay: 0s; }
+	.d2 { animation-duration: 8s;    animation-delay: -2s; }
+	.d3 { animation-duration: 7s;    animation-delay: -1s; }
+	.d4 { animation-duration: 9s;    animation-delay: -3s; }
+	.d5 { animation-duration: 6.5s;  animation-delay: -0.5s; }
+	.d6 { animation-duration: 7.5s;  animation-delay: -4s; }
+	.d7 { animation-duration: 5.5s;  animation-delay: -1.5s; }
+
+	@keyframes float-dot {
+		from { transform: translateY(0);     opacity: 0.3; }
+		to   { transform: translateY(-18px); opacity: 0.85; }
+	}
+
+	/* hero content */
 	.hero__content {
-		display: grid;
-		justify-items: start;
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
 		gap: var(--space-5);
+		max-width: 54rem;
+		margin-inline: auto;
 	}
 
 	.hero h1 {
-		max-width: 14ch;
+		max-width: 16ch;
 	}
 
 	.hero__support {
-		max-width: 39rem;
+		max-width: 38rem;
 		color: var(--color-muted);
-		font-size: clamp(1rem, 2vw, 1.17rem);
+		font-size: clamp(1rem, 2vw, 1.15rem);
+		line-height: 1.75;
 	}
 
 	.hero__actions {
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: center;
 		gap: var(--space-3);
 	}
 
@@ -209,15 +297,29 @@ const handlingAreas = [
 	}
 
 	.hero__note span {
-		width: 0.45rem;
-		height: 0.45rem;
+		display: block;
+		width: 0.4rem;
+		height: 0.4rem;
+		flex-shrink: 0;
+		border-radius: 50%;
 		background: var(--color-cyan);
 		box-shadow: 0 0 0.7rem var(--color-cyan);
+		animation: pulse-dot 2s ease-in-out infinite;
 	}
 
+	@keyframes pulse-dot {
+		0%, 100% { opacity: 1; transform: scale(1); }
+		50%       { opacity: 0.5; transform: scale(0.75); }
+	}
+
+	/* ══════════════════════════════════════════
+	   CAPABILITIES STRIP
+	══════════════════════════════════════════ */
 	.capabilities {
 		border-block: var(--border);
-		background: rgb(11 7 18 / 72%);
+		background: rgb(11 7 18 / 80%);
+		-webkit-backdrop-filter: blur(8px);
+		backdrop-filter: blur(8px);
 	}
 
 	.capabilities .container {
@@ -263,6 +365,9 @@ const handlingAreas = [
 		content: '';
 	}
 
+	/* ══════════════════════════════════════════
+	   SERVICES
+	══════════════════════════════════════════ */
 	.services-grid {
 		display: grid;
 		gap: var(--space-4);
@@ -272,6 +377,9 @@ const handlingAreas = [
 		margin-top: var(--space-6);
 	}
 
+	/* ══════════════════════════════════════════
+	   HANDLING (how we work)
+	══════════════════════════════════════════ */
 	.handling {
 		display: grid;
 		gap: var(--space-7);
@@ -296,38 +404,59 @@ const handlingAreas = [
 		list-style: none;
 	}
 
-	.handling__grid li {
+	.handling__item {
 		display: grid;
 		align-content: start;
 		gap: var(--space-3);
 		padding: var(--space-5);
-		border: var(--border);
-		border-radius: var(--radius-sm);
-		background: rgb(5 3 10 / 56%);
+		border: var(--border-glass);
+		border-radius: var(--radius-md);
+		background: var(--glass-bg);
+		-webkit-backdrop-filter: var(--glass-blur);
+		backdrop-filter: var(--glass-blur);
+		box-shadow: var(--glass-shadow);
+		transition:
+			transform var(--duration-base) var(--ease-spring),
+			box-shadow var(--duration-base) var(--ease-spring),
+			border-color var(--duration-base) var(--ease-spring);
 	}
 
-	.handling__grid li > span {
+	@supports not (backdrop-filter: blur(1px)) {
+		.handling__item {
+			background: rgb(16 10 28 / 92%);
+		}
+	}
+
+	.handling__item:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--glass-shadow-hover), var(--glow-violet);
+		border-color: rgb(124 33 245 / 30%);
+	}
+
+	.handling__item > span {
 		color: var(--color-magenta);
 		font-family: var(--font-display);
 		font-size: 0.7rem;
 	}
 
-	.handling__grid li p {
+	.handling__item p {
 		color: var(--color-muted);
 		font-size: 0.9rem;
 	}
 
-	.packages {
-		position: relative;
-	}
-
+	/* ══════════════════════════════════════════
+	   PACKAGES
+	══════════════════════════════════════════ */
 	.packages__note {
 		display: grid;
 		gap: var(--space-2);
 		padding: var(--space-4) var(--space-5);
 		margin-bottom: var(--space-5);
 		border-left: 3px solid var(--color-cyan);
+		border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 		background: rgb(18 221 243 / 6%);
+		-webkit-backdrop-filter: blur(8px);
+		backdrop-filter: blur(8px);
 	}
 
 	.packages__note p {
@@ -340,6 +469,9 @@ const handlingAreas = [
 		gap: var(--space-4);
 	}
 
+	/* ══════════════════════════════════════════
+	   CONCEPT CREATIVE
+	══════════════════════════════════════════ */
 	.concept__grid {
 		display: grid;
 		align-items: center;
@@ -356,31 +488,61 @@ const handlingAreas = [
 		color: var(--color-muted);
 	}
 
+	/* ══════════════════════════════════════════
+	   FINAL CTA
+	══════════════════════════════════════════ */
 	.final-cta__inner {
 		position: relative;
 		display: grid;
 		justify-items: center;
 		gap: var(--space-5);
 		padding: clamp(var(--space-6), 7vw, var(--space-9));
-		border: 1px solid rgb(242 14 207 / 34%);
-		border-radius: var(--radius-angular);
-		background:
-			linear-gradient(120deg, rgb(124 33 245 / 14%), transparent 45%, rgb(18 221 243 / 8%)),
-			var(--color-raised);
-		box-shadow: var(--glow-violet);
+		border: 1px solid rgb(242 14 207 / 30%);
+		border-radius: var(--radius-md);
+		background: var(--glass-bg);
+		-webkit-backdrop-filter: var(--glass-blur-heavy);
+		backdrop-filter: var(--glass-blur-heavy);
+		box-shadow:
+			var(--glass-shadow),
+			0 0 3rem rgb(124 33 245 / 14%),
+			0 0 6rem rgb(242 14 207 / 8%);
 		text-align: center;
 		overflow: hidden;
+		transition: box-shadow var(--duration-slow) var(--ease-out);
 	}
 
-	.final-cta__inner::after {
-		position: absolute;
-		right: -4rem;
-		bottom: -7rem;
-		width: 14rem;
-		height: 14rem;
-		border: 2rem solid rgb(242 14 207 / 8%);
-		transform: rotate(28deg);
+	@supports not (backdrop-filter: blur(1px)) {
+		.final-cta__inner {
+			background: rgb(16 10 28 / 96%);
+		}
+	}
+
+	/* Top-left inner glow line */
+	.final-cta__inner::before {
 		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+		background: linear-gradient(
+			135deg,
+			rgb(124 33 245 / 12%) 0%,
+			transparent 40%,
+			rgb(18 221 243 / 6%) 100%
+		);
+		pointer-events: none;
+	}
+
+	/* Corner decoration */
+	.final-cta__inner::after {
+		content: '';
+		position: absolute;
+		right: -3rem;
+		bottom: -5rem;
+		width: 12rem;
+		height: 12rem;
+		border: 1.5rem solid rgb(242 14 207 / 8%);
+		transform: rotate(28deg);
+		pointer-events: none;
 	}
 
 	.final-cta h2,
@@ -399,6 +561,9 @@ const handlingAreas = [
 		color: var(--color-muted);
 	}
 
+	/* ══════════════════════════════════════════
+	   RESPONSIVE
+	══════════════════════════════════════════ */
 	@media (min-width: 40rem) {
 		.services-grid {
 			grid-template-columns: repeat(2, 1fr);
@@ -430,10 +595,6 @@ const handlingAreas = [
 	}
 
 	@media (min-width: 64rem) {
-		.hero__grid {
-			grid-template-columns: minmax(0, 1.05fr) minmax(25rem, 0.95fr);
-		}
-
 		.services-grid {
 			grid-template-columns: repeat(3, 1fr);
 		}
@@ -448,9 +609,45 @@ const handlingAreas = [
 	}
 
 	@media (max-width: 30rem) {
-		.hero__actions,
+		.hero__actions {
+			flex-direction: column;
+			width: 100%;
+		}
+
 		.hero__actions :global(.button) {
 			width: 100%;
+			justify-content: center;
 		}
 	}
 </style>
+
+<script>
+	// ── Scroll-reveal for sections ──
+	const revealSections = document.querySelectorAll<HTMLElement>('.reveal-section');
+
+	if ('IntersectionObserver' in window) {
+		const io = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (!entry.isIntersecting) return;
+					const section = entry.target as HTMLElement;
+					// Stagger immediate children
+					Array.from(section.querySelectorAll<HTMLElement>(
+						'.services-grid > *, .handling__item, .packages__grid > *, .process__item'
+					)).forEach((el, i) => {
+						el.style.animationDelay = `${i * 65}ms`;
+						el.classList.add('reveal');
+					});
+					section.classList.add('section--visible');
+					io.unobserve(section);
+				});
+			},
+			{ threshold: 0.08 }
+		);
+
+		revealSections.forEach((s) => io.observe(s));
+	} else {
+		// No IntersectionObserver — show everything immediately
+		revealSections.forEach((s) => s.classList.add('section--visible'));
+	}
+</script>
