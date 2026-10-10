@@ -1,0 +1,325 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ButtonLink from '../components/ButtonLink.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { processSteps, values } from '../data/site';
+import { buildWhatsAppUrl } from '../lib/whatsapp';
+
+const auditUrl = buildWhatsAppUrl();
+
+const valueDetails = [
+  {
+    title: 'Clarity over jargon',
+    description: 'Strategy and reporting explained in plain language. If something cannot be explained clearly, it probably should not be in the plan.',
+  },
+  {
+    title: 'Local context',
+    description: 'Understanding the Zimbabwe market, how people use social platforms here, and what drives purchase decisions for local consumers is as important as technical execution.',
+  },
+  {
+    title: 'Practical creativity',
+    description: 'Creative work that moves customers and fits within the practical constraints of the business — budget, content availability, and realistic timelines.',
+  },
+  {
+    title: 'Transparent execution',
+    description: 'Clear reporting on what was done, what is performing, and what is being adjusted. No hidden ad costs, no vague deliverables, no surprises.',
+  },
+  {
+    title: 'Continuous improvement',
+    description: 'Every month of data is an opportunity to do better. The strategy adapts based on performance, not on assumptions.',
+  },
+];
+
+const teamPoints = [
+  'Zimbabwe-based — local clients, local context, local hours',
+  'Facebook-first awareness that adapts channels to the business and audience',
+  'Management fees and ad spend invoiced separately for full transparency',
+  'Client retains ownership of all pages and accounts',
+  'Strategy, execution, and reporting focus — not vague guarantees',
+];
+---
+
+<BaseLayout
+  title="About"
+  description="Menace World Tech is a Zimbabwe-based digital growth partner for small businesses. Social media strategy, content, advertising, web, and automation with a local-first approach."
+>
+
+  <section class="page-hero section">
+    <div class="container">
+      <p class="eyebrow">Who we are</p>
+      <h1>A small business<br /><span class="gradient-text">helping small businesses grow.</span></h1>
+      <p class="page-hero__sub">Menace World Tech is a Zimbabwe-based digital growth partner. Not a social media manager — a partner that handles your full digital presence so you can stay focused on running your business.</p>
+      <ButtonLink href={auditUrl}>Start a conversation</ButtonLink>
+    </div>
+  </section>
+
+  <section class="section section--raised mission" id="mission">
+    <div class="container mission__grid">
+      <div class="mission__content">
+        <p class="eyebrow">What drives us</p>
+        <h2>Mission</h2>
+        <p>Make practical, professionally executed digital growth accessible to Zimbabwean small businesses — without requiring them to understand every platform, algorithm, or ad format themselves.</p>
+      </div>
+      <div class="mission__content">
+        <p class="eyebrow">Where we're headed</p>
+        <h2>Vision</h2>
+        <p>Help local businesses build durable digital brands that attract customers, generate leads, and compete confidently in a market that is moving online faster every year.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section values" id="values">
+    <div class="container">
+      <SectionHeading
+        eyebrow="What we stand for"
+        title="Our values"
+        description="These five principles shape how decisions are made, how work is delivered, and how clients are treated."
+      />
+      <div class="values-grid">
+        {valueDetails.map((value, i) => (
+          <div class="value-item">
+            <span class="value-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{value.title}</h3>
+            <p>{value.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--raised approach" id="approach">
+    <div class="container approach__grid">
+      <div class="approach__content">
+        <p class="eyebrow">How we work</p>
+        <h2>Local by default.<br />Strategic by design.</h2>
+        <p>Facebook leads reach in Zimbabwe because it captures the most active social time for most demographics. That makes it the default starting point for almost every small business client. But it is not the only answer — Instagram, TikTok, LinkedIn, and WhatsApp all have specific roles depending on the business, the product, and the audience. Channels are selected based on what actually makes sense for the business, not added as a default upsell.</p>
+        <p style="margin-top: var(--space-4); color: var(--color-muted);">The same logic applies to every other decision: budget, content format, posting frequency, ad targeting, and reporting structure. Everything starts with the business reality, not a template.</p>
+      </div>
+
+      <div class="approach__points">
+        <ul>
+          {teamPoints.map((point) => (
+            <li>
+              <span aria-hidden="true">◆</span>
+              {point}
+            </li>
+          ))}
+        </ul>
+        <aside class="approach-note">
+          <p>Results — followers gained, enquiries generated, and sales influenced — depend on offer quality, market timing, ad budget, content consistency, and factors outside any agency's control. Menace World Tech commits to practical strategy, rigorous execution, and honest reporting. Outcomes are not guaranteed.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section process" id="process">
+    <div class="container">
+      <SectionHeading
+        eyebrow="From first contact to ongoing growth"
+        title="How every client relationship works"
+        description="A clear process keeps the work focused and makes it easy to see what is happening at every stage."
+      />
+      <ProcessSteps steps={processSteps} />
+    </div>
+  </section>
+
+  <section class="section section--raised final-cta">
+    <div class="container final-cta__inner">
+      <p class="eyebrow">Let's talk</p>
+      <h2>Taking your business to another dimension.</h2>
+      <p>Start with a free growth audit — a short, practical review of your current online presence and a clear conversation about what could make sense next.</p>
+      <ButtonLink href={auditUrl}>Get a free growth audit</ButtonLink>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-top: clamp(var(--space-8), 10vw, var(--space-10));
+  }
+
+  .page-hero .container {
+    display: grid;
+    gap: var(--space-5);
+    max-width: 56rem;
+    justify-items: start;
+  }
+
+  .page-hero h1 {
+    max-width: 16ch;
+  }
+
+  .page-hero__sub {
+    max-width: 46rem;
+    color: var(--color-muted);
+    font-size: clamp(1rem, 2vw, 1.15rem);
+  }
+
+  .mission__grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .mission__content {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .mission__content h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+  }
+
+  .mission__content p {
+    color: var(--color-muted);
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    max-width: 46rem;
+  }
+
+  .values-grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .value-item {
+    position: relative;
+    display: grid;
+    gap: var(--space-3);
+    padding: clamp(var(--space-5), 4vw, var(--space-6));
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, rgb(16 10 28 / 94%), rgb(5 3 10 / 76%));
+    overflow: hidden;
+  }
+
+  .value-item::before {
+    position: absolute;
+    bottom: -2rem;
+    right: -2rem;
+    width: 7rem;
+    height: 7rem;
+    border: 1px solid rgb(124 33 245 / 12%);
+    transform: rotate(25deg);
+    content: '';
+  }
+
+  .value-num {
+    color: var(--color-magenta);
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+  }
+
+  .value-item h3 {
+    font-size: clamp(1.15rem, 2vw, 1.35rem);
+  }
+
+  .value-item p {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+  }
+
+  .approach__grid {
+    display: grid;
+    gap: clamp(var(--space-7), 8vw, var(--space-9));
+    align-items: start;
+  }
+
+  .approach__content {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .approach__content p {
+    color: var(--color-muted);
+    font-size: clamp(1rem, 2vw, 1.05rem);
+    max-width: 44rem;
+  }
+
+  .approach__content h2 {
+    max-width: 14ch;
+  }
+
+  .approach__points ul {
+    display: grid;
+    gap: var(--space-3);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .approach__points li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    font-size: 0.95rem;
+  }
+
+  .approach__points li span {
+    color: var(--color-cyan);
+    font-size: 0.6rem;
+    margin-top: 0.35em;
+    flex-shrink: 0;
+  }
+
+  .approach-note {
+    margin-top: var(--space-5);
+    padding: var(--space-4) var(--space-5);
+    border-left: 2px solid var(--color-violet);
+    background: rgb(124 33 245 / 6%);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .approach-note p {
+    color: var(--color-muted);
+    font-size: 0.82rem;
+  }
+
+  .final-cta__inner {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-5);
+    text-align: center;
+    padding: clamp(var(--space-6), 7vw, var(--space-9));
+    border: 1px solid rgb(242 14 207 / 34%);
+    border-radius: var(--radius-angular);
+    background: linear-gradient(120deg, rgb(124 33 245 / 14%), transparent 45%, rgb(18 221 243 / 8%)), var(--color-raised);
+    box-shadow: var(--glow-violet);
+  }
+
+  .final-cta__inner h2 {
+    max-width: 18ch;
+  }
+
+  .final-cta__inner p:not(.eyebrow) {
+    max-width: 40rem;
+    color: var(--color-muted);
+  }
+
+  @media (min-width: 40rem) {
+    .mission__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .values-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .values-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .approach__grid {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    /* Fifth value spans full width on a 3-col grid so it doesn't orphan */
+    .value-item:last-child:nth-child(3n + 1) {
+      grid-column: 1 / -1;
+      max-width: 36rem;
+    }
+  }
+</style>

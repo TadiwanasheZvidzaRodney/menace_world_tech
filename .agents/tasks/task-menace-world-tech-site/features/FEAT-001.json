@@ -1,0 +1,25 @@
+{
+  "id": "FEAT-001",
+  "type": "feat",
+  "description": "Create the Astro-only Menace World Tech brand foundation, structured content, shared accessible shell/components, original SVG/CSS art, and complete home route. This feature is the dependency for FEAT-002 and leaves a fully buildable branded one-page site.",
+  "status": "completed",
+  "steps": [
+    "Implement plan.md item 1: update astro.config.mjs for explicit static output and optional SITE_URL; add src/styles/global.css; add typed src/data/site.ts, src/data/services.ts, and src/data/packages.ts; add src/lib/whatsapp.ts with canonical 263783980802 helpers; replace public/favicon.svg, remove public/favicon.ico, and create public/brand/menace-world-tech-mark.svg plus public/brand/social-card.svg.",
+    "Implement plan.md item 2 shared shell: create src/layouts/BaseLayout.astro and BrandMark, ButtonLink, SectionHeading, SiteHeader, SiteFooter, ServiceCard, PackageCard, FaqList, and ProcessSteps components with typed props, accessible semantics, sticky/mobile navigation behavior, route metadata, truthful ProfessionalService JSON-LD, and exact footer contact details.",
+    "Create src/components/visuals/HeroDimension.astro and src/components/visuals/CampaignShowcase.astro as restrained responsive original art, then replace src/pages/index.astro with the complete specified home narrative and exact hero/CTA/section copy. Label showcase work as Menace World Tech concept creative rather than client work.",
+    "Run the feature verification, correct all Astro/TypeScript/CSS build errors, update this FEAT status to completed, and record implementation details or later-step caveats in findings."
+  ],
+  "acceptance_criteria": [
+    "npm run build succeeds in static mode with no additional frontend framework and no remote image/font dependency.",
+    "The home page contains the exact eyebrow, headline, audit and package CTAs, capability strip, six featured services, We handle everything section, Audit-Build-Launch-Optimize process, package teaser with fee/spend distinction, clearly labeled concept showcase, and final CTA.",
+    "Global CSS documents the exact requested color tokens, 4/8px spacing scale, typography, radii, borders, widths, restrained glows, focus treatment, responsive behavior, overflow protection, and prefers-reduced-motion behavior.",
+    "The shared header is keyboard accessible and progressively enhanced with accurate aria-expanded state and required close behavior; the footer has only truthful navigation, service links, canonical WhatsApp/call details, Zimbabwe, tagline, and dynamic year.",
+    "All eight services and exact package/add-on facts are represented in typed data without fabricated business details, testimonials, metrics, claims, or guarantees.",
+    "Every visual asset is original local SVG/CSS; the dimensional M/up-arrow logo replaces all visible Astro starter branding and decorative SVGs are hidden from assistive technology."
+  ],
+  "verification": [
+    "npm run build"
+  ],
+  "blocked_reason": null,
+  "findings": "Implemented explicit static configuration with optional SITE_URL; documented global brand tokens; typed site, eight-service, four-tier package, add-on, and FAQ data; canonical 263783980802 WhatsApp/call helpers; original local favicon, mark, social card, hero, and concept artwork; typed accessible layout/header/footer/cards/FAQ/process components; and the complete home narrative. Verification: npm run build passed with Astro reporting output and mode static, bundling the navigation enhancement, and generating /index.html. No framework, dependency, remote image/font, fabricated metric, testimonial, or guarantee was added; public/favicon.ico was removed. FEAT-002 integration: planned page and service links are prewired, but /services, /packages, /about, and /contact were intentionally not created; reuse the centralized data, layout, and components. The requested feature-local plan.md was absent, so the authoritative .agents/tasks/plan.md identified by context.json was used. A local commit was unavailable because this directory is not a Git repository; Git was not initialized."
+}

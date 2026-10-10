@@ -1,0 +1,78 @@
+---
+interface Props {
+	href: string;
+	variant?: 'primary' | 'secondary' | 'text';
+	class?: string;
+	ariaLabel?: string;
+}
+
+const { href, variant = 'primary', class: className, ariaLabel } = Astro.props;
+---
+
+<a class:list={['button', `button--${variant}`, className]} href={href} aria-label={ariaLabel}>
+	<span><slot /></span>
+	<svg viewBox="0 0 20 20" aria-hidden="true">
+		<path d="M4 10h11M10 5l5 5-5 5"></path>
+	</svg>
+</a>
+
+<style>
+	.button {
+		display: inline-flex;
+		min-height: 3rem;
+		align-items: center;
+		justify-content: center;
+		gap: var(--space-3);
+		padding: 0.75rem 1.1rem;
+		border: 1px solid transparent;
+		border-radius: var(--radius-sm);
+		font-size: 0.82rem;
+		font-weight: 850;
+		letter-spacing: 0.04em;
+		line-height: 1.2;
+		text-decoration: none;
+		text-transform: uppercase;
+		transition: color 180ms ease, background 180ms ease, border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+	}
+
+	.button:hover {
+		transform: translateY(-2px);
+		color: var(--color-text);
+	}
+
+	.button svg {
+		width: 1.1rem;
+		fill: none;
+		stroke: currentColor;
+		stroke-linecap: square;
+		stroke-width: 1.8;
+	}
+
+	.button--primary {
+		background: linear-gradient(110deg, var(--color-violet), var(--color-magenta));
+		box-shadow: 0 0 1.5rem rgb(124 33 245 / 22%);
+		color: var(--color-text);
+	}
+
+	.button--primary:hover {
+		box-shadow: 0 0 2rem rgb(242 14 207 / 30%);
+	}
+
+	.button--secondary {
+		border-color: var(--color-border-strong);
+		background: rgb(16 10 28 / 72%);
+		color: var(--color-text);
+	}
+
+	.button--secondary:hover {
+		border-color: var(--color-cyan);
+		background: rgb(18 221 243 / 7%);
+	}
+
+	.button--text {
+		min-height: auto;
+		justify-content: flex-start;
+		padding: 0;
+		color: var(--color-cyan);
+	}
+</style>

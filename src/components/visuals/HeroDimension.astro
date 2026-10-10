@@ -1,0 +1,119 @@
+<figure class="dimension" aria-hidden="true">
+	<div class="dimension__label dimension__label--one"><span></span>Clarity</div>
+	<div class="dimension__label dimension__label--two"><span></span>Momentum</div>
+	<svg viewBox="0 0 620 560" fill="none">
+		<defs>
+			<linearGradient id="hero-line" x1="92" y1="474" x2="524" y2="72" gradientUnits="userSpaceOnUse">
+				<stop stop-color="#7C21F5"></stop>
+				<stop offset=".5" stop-color="#F20ECF"></stop>
+				<stop offset="1" stop-color="#12DDF3"></stop>
+			</linearGradient>
+			<filter id="hero-glow" x="-40%" y="-40%" width="180%" height="180%">
+				<feGaussianBlur stdDeviation="10" result="blur"></feGaussianBlur>
+				<feMerge><feMergeNode in="blur"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+			</filter>
+		</defs>
+		<g opacity=".16" stroke="#F7F5FF">
+			<path d="M48 80h524M48 160h524M48 240h524M48 320h524M48 400h524M48 480h524"></path>
+			<path d="M80 48v464M160 48v464M240 48v464M320 48v464M400 48v464M480 48v464M560 48v464"></path>
+		</g>
+		<path d="M87 451c65-17 86-101 143-119 58-18 80 26 132-28 50-52 53-142 139-192" stroke="url(#hero-line)" stroke-width="6" filter="url(#hero-glow)"></path>
+		<path d="m473 107 38-7-9 38" stroke="#12DDF3" stroke-width="6"></path>
+		<path d="M130 423V197l97 108 97-108v159" stroke="url(#hero-line)" stroke-width="24" stroke-linejoin="bevel" opacity=".86"></path>
+		<circle cx="87" cy="451" r="8" fill="#7C21F5"></circle>
+		<circle cx="230" cy="332" r="8" fill="#F20ECF"></circle>
+		<circle cx="501" cy="112" r="8" fill="#12DDF3"></circle>
+		<path d="M50 510h520" stroke="#F7F5FF" stroke-opacity=".28"></path>
+	</svg>
+	<div class="dimension__metric"><span>01</span><strong>Audit</strong><small>Start with what is real.</small></div>
+</figure>
+
+<style>
+	.dimension {
+		position: relative;
+		width: min(100%, 37rem);
+		min-height: 29rem;
+		margin: 0 auto;
+		border: var(--border);
+		border-radius: var(--radius-angular);
+		background: linear-gradient(145deg, rgb(16 10 28 / 80%), rgb(5 3 10 / 60%));
+		box-shadow: var(--glow-violet), inset 0 0 3rem rgb(18 221 243 / 4%);
+		overflow: hidden;
+	}
+
+	.dimension::before {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(115deg, transparent 60%, rgb(18 221 243 / 5%));
+		content: '';
+	}
+
+	.dimension svg {
+		width: 100%;
+		height: auto;
+	}
+
+	.dimension__label {
+		position: absolute;
+		z-index: 2;
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		padding: var(--space-2) var(--space-3);
+		border: var(--border);
+		background: rgb(5 3 10 / 88%);
+		color: var(--color-muted);
+		font-size: 0.65rem;
+		font-weight: 800;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.dimension__label span {
+		width: 0.4rem;
+		height: 0.4rem;
+		background: var(--color-cyan);
+		box-shadow: 0 0 0.7rem var(--color-cyan);
+	}
+
+	.dimension__label--one {
+		top: 9%;
+		left: 5%;
+	}
+
+	.dimension__label--two {
+		top: 24%;
+		right: 4%;
+	}
+
+	.dimension__metric {
+		position: absolute;
+		right: 5%;
+		bottom: 5%;
+		display: grid;
+		min-width: 10rem;
+		padding: var(--space-4);
+		border-left: 2px solid var(--color-magenta);
+		background: rgb(5 3 10 / 90%);
+	}
+
+	.dimension__metric span,
+	.dimension__metric small {
+		color: var(--color-muted);
+		font-size: 0.65rem;
+	}
+
+	.dimension__metric strong {
+		font-family: var(--font-display);
+	}
+
+	@media (max-width: 30rem) {
+		.dimension {
+			min-height: auto;
+		}
+
+		.dimension__metric {
+			display: none;
+		}
+	}
+</style>

@@ -1,0 +1,362 @@
+---
+import { services } from '../data/services';
+import { PHONE_DISPLAY, WHATSAPP_NUMBER } from '../data/site';
+
+// Fallback WhatsApp URL with generic message for JS-disabled environments
+const fallbackMsg = encodeURIComponent("Hello Menace World Tech, I'd like a free growth audit for my business.");
+const fallbackAction = `https://wa.me/${WHATSAPP_NUMBER}?text=${fallbackMsg}`;
+---
+
+<form
+  id="contact-form"
+  class="contact-form"
+  action={fallbackAction}
+  method="GET"
+  novalidate
+  aria-label="Free growth audit request"
+>
+  <!-- Hidden field used by the raw GET fallback so WhatsApp receives a usable message -->
+  <input type="hidden" name="text" value={`Hello Menace World Tech, I'd like a free growth audit for my business.`} />
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="cf-name">Your name <span class="required" aria-hidden="true">*</span></label>
+      <input
+        id="cf-name"
+        name="name"
+        type="text"
+        required
+        autocomplete="name"
+        placeholder="e.g. Tadi Zvidza"
+        aria-required="true"
+      />
+      <span class="field-hint" id="cf-name-hint">Required</span>
+    </div>
+
+    <div class="form-group">
+      <label for="cf-business">Business name <span class="required" aria-hidden="true">*</span></label>
+      <input
+        id="cf-business"
+        name="business"
+        type="text"
+        required
+        autocomplete="organization"
+        placeholder="e.g. Zvidza Fashion Boutique"
+        aria-required="true"
+      />
+      <span class="field-hint" id="cf-business-hint">Required</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="cf-phone">WhatsApp / phone number <span class="required" aria-hidden="true">*</span></label>
+    <input
+      id="cf-phone"
+      name="phone"
+      type="tel"
+      required
+      autocomplete="tel"
+      inputmode="tel"
+      placeholder="e.g. +263 77 123 4567"
+      aria-required="true"
+      aria-describedby="cf-phone-hint"
+    />
+    <span class="field-hint" id="cf-phone-hint">We'll reply on WhatsApp — using this number.</span>
+  </div>
+
+  <div class="form-group">
+    <label for="cf-service">Service interest</label>
+    <select id="cf-service" name="service" autocomplete="off">
+      <option value="">Not sure yet — let's talk</option>
+      {services.map((s) => (
+        <option value={s.id}>{s.title}</option>
+      ))}
+      <option value="multiple">Multiple services</option>
+      <option value="other">Something else</option>
+    </select>
+    <span class="field-hint">Optional — helps us prepare for the conversation.</span>
+  </div>
+
+  <div class="form-group">
+    <label for="cf-challenge">Current challenge <span class="required" aria-hidden="true">*</span></label>
+    <textarea
+      id="cf-challenge"
+      name="challenge"
+      required
+      rows="4"
+      aria-required="true"
+      aria-describedby="cf-challenge-hint"
+      placeholder="e.g. We post on Facebook but get no enquiries. We want more customers from social media."
+    ></textarea>
+    <span class="field-hint" id="cf-challenge-hint">Required. A few sentences is enough — this shapes the audit.</span>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="cf-budget">Approximate monthly budget (optional)</label>
+      <select id="cf-budget" name="budget" autocomplete="off">
+        <option value="">Not sure yet</option>
+        <option value="under-100">Under $100/mo</option>
+        <option value="100-200">$100–$200/mo</option>
+        <option value="200-500">$200–$500/mo</option>
+        <option value="500-plus">$500+/mo</option>
+      </select>
+      <span class="field-hint">Helps us recommend the right package range.</span>
+    </div>
+
+    <div class="form-group">
+      <label for="cf-timeline">Ideal start date (optional)</label>
+      <input
+        id="cf-timeline"
+        name="timeline"
+        type="text"
+        autocomplete="off"
+        placeholder="e.g. As soon as possible"
+      />
+    </div>
+  </div>
+
+  <div class="form-status" role="alert" aria-live="polite" aria-atomic="true" id="cf-status"></div>
+
+  <div class="form-actions">
+    <button type="submit" class="button button--primary">
+      <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.72 10a1 1 0 0 0-.3-.7l-6-6a1 1 0 0 0-1.42 1.41L13.59 9H4a1 1 0 1 0 0 2h9.59l-4.6 4.6a1 1 0 0 0 1.42 1.41l6-6a1 1 0 0 0 .3-.7Z" clip-rule="evenodd"/></svg>
+      Send via WhatsApp
+    </button>
+    <p class="form-actions__note">Opens WhatsApp with a prepared message. No account needed.</p>
+  </div>
+</form>
+
+<script>
+(function () {
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const statusEl = document.getElementById('cf-status');
+  if (!form) return;
+
+  function setStatus(msg: string, type: 'error' | 'success' | '') {
+    if (!statusEl) return;
+    statusEl.textContent = msg;
+    statusEl.className = `form-status form-status--${type}`;
+  }
+
+  function buildMessage(data: FormData): string {
+    const name = (data.get('name') as string).trim();
+    const business = (data.get('business') as string).trim();
+    const phone = (data.get('phone') as string).trim();
+    const serviceRaw = data.get('service') as string;
+    const service = serviceRaw ? serviceRaw.replace(/-/g, ' ') : 'not specified';
+    const challenge = (data.get('challenge') as string).trim();
+    const budget = (data.get('budget') as string).replace(/-/g, ' ') || 'not specified';
+    const timeline = (data.get('timeline') as string).trim() || 'not specified';
+
+    return [
+      `Hello Menace World Tech, I'd like a free growth audit.`,
+      ``,
+      `Name: ${name}`,
+      `Business: ${business}`,
+      `Phone/WhatsApp: ${phone}`,
+      `Service interest: ${service}`,
+      `Challenge: ${challenge}`,
+      `Budget range: ${budget}`,
+      `Ideal start: ${timeline}`,
+    ].join('\n');
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    setStatus('', '');
+
+    const data = new FormData(form);
+    const name = (data.get('name') as string || '').trim();
+    const business = (data.get('business') as string || '').trim();
+    const phone = (data.get('phone') as string || '').trim();
+    const challenge = (data.get('challenge') as string || '').trim();
+
+    const errors: string[] = [];
+    if (!name) errors.push('your name');
+    if (!business) errors.push('your business name');
+    if (!phone) errors.push('your WhatsApp number');
+    if (!challenge) errors.push('a brief description of your challenge');
+
+    if (errors.length > 0) {
+      setStatus(`Please fill in: ${errors.join(', ')}.`, 'error');
+      const firstEmpty = ['cf-name', 'cf-business', 'cf-phone', 'cf-challenge'].find(id => {
+        const el = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | null;
+        return el && !el.value.trim();
+      });
+      if (firstEmpty) {
+        const el = document.getElementById(firstEmpty);
+        el?.focus();
+      }
+      return;
+    }
+
+    const message = buildMessage(data);
+    const waNumber = '263783980802';
+    const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+
+    setStatus('Opening WhatsApp…', 'success');
+    window.open(url, '_blank', 'noopener,noreferrer');
+  });
+})();
+</script>
+
+<style>
+  .contact-form {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .form-row {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .form-group {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--color-text);
+  }
+
+  .required {
+    color: var(--color-magenta);
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgb(5 3 10 / 80%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    font-size: 0.95rem;
+    transition: border-color 140ms ease, box-shadow 140ms ease;
+    appearance: none;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-muted);
+    opacity: 0.7;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: var(--color-cyan);
+    box-shadow: 0 0 0 3px rgb(18 221 243 / 18%);
+  }
+
+  input:invalid:not(:placeholder-shown),
+  textarea:invalid:not(:placeholder-shown) {
+    border-color: rgb(242 14 207 / 60%);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 7rem;
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 20 20' fill='%23AAA3BA' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 7l3-3 3 3M7 13l3 3 3-3'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.2rem;
+    padding-right: 2.5rem;
+    cursor: pointer;
+  }
+
+  select option {
+    background: #0b0712;
+    color: var(--color-text);
+  }
+
+  .field-hint {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    line-height: 1.4;
+  }
+
+  .form-status {
+    min-height: 1.4rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+  }
+
+  .form-status--error {
+    padding: var(--space-3) var(--space-4);
+    background: rgb(242 14 207 / 8%);
+    border: 1px solid rgb(242 14 207 / 40%);
+    color: #f97fb8;
+  }
+
+  .form-status--success {
+    padding: var(--space-3) var(--space-4);
+    background: rgb(18 221 243 / 8%);
+    border: 1px solid rgb(18 221 243 / 30%);
+    color: var(--color-cyan);
+  }
+
+  .form-actions {
+    display: grid;
+    gap: var(--space-3);
+    justify-items: start;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.875rem 1.75rem;
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: filter 160ms ease, transform 120ms ease;
+  }
+
+  .button:active {
+    transform: scale(0.98);
+  }
+
+  .button--primary {
+    background: linear-gradient(110deg, var(--color-violet), var(--color-magenta));
+    color: #fff;
+    box-shadow: 0 0 2rem rgb(242 14 207 / 24%);
+  }
+
+  .button--primary:hover {
+    filter: brightness(1.12);
+  }
+
+  .button svg {
+    width: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .form-actions__note {
+    color: var(--color-muted);
+    font-size: 0.78rem;
+  }
+
+  @media (min-width: 40rem) {
+    .form-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

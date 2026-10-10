@@ -1,0 +1,57 @@
+---
+interface Props {
+	showName?: boolean;
+	compact?: boolean;
+}
+
+const { showName = true, compact = false } = Astro.props;
+---
+
+<span class:list={['brand', { 'brand--compact': compact }]}>
+	<img
+		class="brand__mark"
+		src="/logo.webp"
+		alt="Menace World Tech logo"
+		width="160"
+		height="160"
+		loading="lazy"
+		decoding="async"
+	/>
+	{showName && <span class="brand__name"><strong>Menace World</strong><span>Tech</span></span>}
+</span>
+
+<style>
+	.brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.65rem;
+		color: var(--color-text);
+	}
+
+	.brand__mark {
+		width: 2.65rem;
+		height: 2.65rem;
+		flex: none;
+		object-fit: contain;
+	}
+
+	.brand__name {
+		display: grid;
+		font-size: 0.76rem;
+		font-weight: 800;
+		letter-spacing: 0.1em;
+		line-height: 1.05;
+		text-transform: uppercase;
+	}
+
+	.brand__name span {
+		color: var(--color-cyan);
+		font-size: 0.65rem;
+		letter-spacing: 0.28em;
+	}
+
+	.brand--compact .brand__mark {
+		width: 2.2rem;
+		height: 2.2rem;
+	}
+</style>

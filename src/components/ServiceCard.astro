@@ -1,0 +1,81 @@
+---
+import type { Service } from '../data/services';
+
+interface Props {
+	service: Service;
+	index?: number;
+}
+
+const { service, index = 0 } = Astro.props;
+---
+
+<article class="service-card">
+	<div class="service-card__top">
+		<span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+		<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 25 25 5M13 5h12v12"></path></svg>
+	</div>
+	<h3>{service.title}</h3>
+	<p>{service.description}</p>
+	<a href={`/services#${service.id}`}>Explore service <span class="sr-only">: {service.title}</span></a>
+</article>
+
+<style>
+	.service-card {
+		position: relative;
+		display: grid;
+		min-height: 19rem;
+		align-content: start;
+		gap: var(--space-4);
+		padding: clamp(var(--space-5), 4vw, var(--space-6));
+		border: var(--border);
+		border-radius: var(--radius-angular);
+		background: linear-gradient(145deg, rgb(16 10 28 / 94%), rgb(11 7 18 / 76%));
+		box-shadow: var(--glow-violet);
+		overflow: hidden;
+	}
+
+	.service-card::after {
+		position: absolute;
+		right: -3rem;
+		bottom: -4rem;
+		width: 9rem;
+		height: 9rem;
+		border: 1px solid rgb(18 221 243 / 15%);
+		transform: rotate(35deg);
+		content: '';
+	}
+
+	.service-card__top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		color: var(--color-cyan);
+		font-family: var(--font-display);
+		font-size: 0.72rem;
+		letter-spacing: 0.12em;
+	}
+
+	.service-card__top svg {
+		width: 1.6rem;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 1.5;
+	}
+
+	.service-card p {
+		color: var(--color-muted);
+	}
+
+	.service-card > a {
+		position: relative;
+		z-index: 1;
+		align-self: end;
+		margin-top: auto;
+		color: var(--color-text);
+		font-size: 0.78rem;
+		font-weight: 800;
+		letter-spacing: 0.08em;
+		text-decoration-color: var(--color-magenta);
+		text-transform: uppercase;
+	}
+</style>

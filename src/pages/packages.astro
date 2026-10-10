@@ -1,0 +1,621 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ButtonLink from '../components/ButtonLink.astro';
+import FaqList from '../components/FaqList.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { addOns, packageFaqs, packageTiers, pricingNote } from '../data/packages';
+import { buildWhatsAppUrl } from '../lib/whatsapp';
+
+const fullPackages = [
+  {
+    id: 'starter-presence',
+    name: 'Starter Presence',
+    label: 'Get Visible',
+    color: 'cyan',
+    tier: '01',
+    managementFee: '$60–$150/mo',
+    adBudget: '$20–$50/mo',
+    summary: 'Build a consistent, professional online presence on your most important platform.',
+    includes: [
+      '1 platform — Facebook primary',
+      '8–12 branded posts per month',
+      'Monthly content calendar',
+      'Captions and hashtags written for you',
+      'Full page optimisation: bio, cover, highlights',
+      'Basic boosted post management using agreed ad budget',
+      'Monthly performance summary',
+    ],
+    idealFor: ['New or early-stage businesses', 'Shops, salons, food vendors', 'Businesses with no current page manager', 'Owners testing paid reach for the first time'],
+    whatToExpect: 'A live, active page presence from day one. Boosted posts reaching new local audiences. Improved page professionalism and trust. Growing organic reach over 30–60 days.',
+    whatsAppMessage: "Hello Menace World Tech, I'm interested in the Starter Presence package.",
+  },
+  {
+    id: 'growth-engagement',
+    name: 'Growth Engagement',
+    label: 'Get Customers',
+    color: 'violet',
+    tier: '02',
+    managementFee: '$120–$300/mo',
+    adBudget: '$50–$150/mo',
+    summary: 'Turn followers into enquiries with consistent content across two platforms and targeted paid campaigns.',
+    includes: [
+      '2 platforms — Facebook + Instagram or TikTok',
+      '12–16 posts per month across both platforms',
+      '2–4 short-form Reels or TikTok videos per month',
+      'DM and comment replies — full community management',
+      'Ad campaign setup, targeting, and active management',
+      'Audience strategy built around your ideal customer',
+      'Monthly analytics report',
+    ],
+    idealFor: ['Businesses with some online presence', 'Restaurants, boutiques, fitness studios', 'Owners wanting consistent lead generation', 'Businesses targeting a younger or visual audience'],
+    whatToExpect: 'Measurable audience growth by month 2. Targeted ads reaching your specific customer profile. Increased DMs, enquiries, and page engagement. Monthly report showing real performance data.',
+    whatsAppMessage: "Hello Menace World Tech, I'm interested in the Growth Engagement package.",
+  },
+  {
+    id: 'business-boost',
+    name: 'Business Boost',
+    label: 'Make Sales',
+    color: 'magenta',
+    tier: '03',
+    managementFee: '$250–$500/mo',
+    adBudget: '$100–$300/mo',
+    summary: 'Full-platform growth with high-performing ad campaigns, regular video, and weekly performance insights.',
+    includes: [
+      '3 platforms — Facebook + Instagram + TikTok',
+      '16–25 posts per month across all channels',
+      '6–10 short-form vertical videos per month',
+      'Content repurposing across all platforms',
+      'Full ad campaign management: strategy, creative, targeting and optimisation',
+      'A/B testing on ad creatives for best performance',
+      'Retargeting campaigns for warm audiences',
+      'Weekly performance insights and strategy review',
+    ],
+    idealFor: ['Established businesses ready to scale', 'E-commerce or high-volume service providers', 'Businesses with a consistent monthly marketing budget', 'Owners who want measurable ROI from every dollar spent'],
+    whatToExpect: 'Significant follower and reach growth within 60 days. Ad campaigns generating measurable leads or sales. Consistent branded presence across all 3 platforms. Weekly data-driven reporting and campaign adjustments.',
+    whatsAppMessage: "Hello Menace World Tech, I'm interested in the Business Boost package.",
+  },
+  {
+    id: 'premium',
+    name: 'Premium',
+    label: 'Full Command',
+    color: 'violet',
+    tier: '04',
+    managementFee: '$400–$600/mo',
+    adBudget: '$200+/mo',
+    summary: 'Total brand presence across all major platforms with advanced video, influencer coordination, and comprehensive campaign management.',
+    includes: [
+      'Full multi-platform management — Facebook, Instagram, TikTok, LinkedIn',
+      '25+ posts per month across all platforms',
+      'Advanced video production and professional editing',
+      'Influencer identification, outreach, and coordination',
+      'Full multi-campaign ad strategy with quarterly planning',
+      'Advanced audience segmentation and lookalike targeting',
+      'Comprehensive weekly and monthly performance reporting',
+      'Priority support and dedicated account management',
+    ],
+    idealFor: ['Established businesses with proven revenue', 'Multi-location or high-volume businesses', 'Brands preparing for major launches or campaigns', 'Clients who want a true full-service marketing partner'],
+    whatToExpect: 'Dominant, recognisable brand presence within 90 days. Multi-campaign ads running simultaneously, fully managed. Influencer partnerships unlocking new audience segments. Strategic quarterly reviews tied to real business goals.',
+    whatsAppMessage: "Hello Menace World Tech, I'm interested in the Premium package.",
+    note: 'This tier is introduced once Menace World Tech has the capacity and track record to deliver it at this level. Contact to discuss availability.',
+  },
+];
+---
+
+<BaseLayout
+  title="Packages & Pricing"
+  description="Four clear service packages for social media marketing in Zimbabwe. Management fees from $60/mo. Ad spend is separate, agreed, and transparent."
+>
+
+  <section class="page-hero section">
+    <div class="container">
+      <p class="eyebrow">Choose your starting point</p>
+      <h1>Start fast. Price right.<br /><span class="gradient-text">Scale with purpose.</span></h1>
+      <p class="page-hero__sub">Four management-fee ranges built around the practical reality of running a Zimbabwean small business. Each one is a clear starting point — the exact scope is agreed before work begins.</p>
+    </div>
+  </section>
+
+  <section class="explainer section--raised" aria-labelledby="pricing-explainer">
+    <div class="container explainer__grid">
+      <div class="explainer__item">
+        <div class="explainer__icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><rect x="3" y="6" width="26" height="20" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 12h26" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="20" r="2" fill="currentColor" opacity="0.7"/></svg>
+        </div>
+        <h2 id="pricing-explainer" class="explainer__title">Management fee</h2>
+        <p>This is what you pay Menace World Tech for strategy, content creation, scheduling, community management, and execution. It is the agreed monthly fee for the work itself.</p>
+      </div>
+      <div class="explainer__separator" aria-hidden="true">+</div>
+      <div class="explainer__item">
+        <div class="explainer__icon explainer__icon--cyan" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M16 3v6M16 23v6M3 16h6M23 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="16" r="7" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <h2 class="explainer__title">Ad budget <span class="tag">Additional</span></h2>
+        <p>This is a separate, agreed amount passed directly to the advertising platforms (Facebook, Instagram, TikTok). Menace World Tech purchases the ads, manages targeting, and reports on every dollar spent. You never log in to any ad platform.</p>
+      </div>
+    </div>
+    <p class="container explainer__note">{pricingNote}</p>
+  </section>
+
+  <section class="section packages" id="packages">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Service packages"
+        title="Choose your package"
+        description="All prices are USD. Management fee and ad budget are invoiced separately for full transparency."
+      />
+
+      <div class="packages-grid">
+        {fullPackages.map((pkg) => (
+          <article id={pkg.id} class:list={['pkg-card', `pkg-card--${pkg.color}`, { 'pkg-card--featured': pkg.id === 'business-boost' }]}>
+            <div class="pkg-card__header">
+              <span class="pkg-card__tier">{pkg.tier}</span>
+              <span class:list={['pkg-card__badge', `badge--${pkg.color}`]}>{pkg.label}</span>
+            </div>
+            <h3 class="pkg-card__name">{pkg.name}</h3>
+            <p class="pkg-card__summary">{pkg.summary}</p>
+
+            <div class="pkg-card__pricing">
+              <div class="price-block">
+                <span class="price-label">Management fee</span>
+                <strong class="price-value">{pkg.managementFee}</strong>
+              </div>
+              <div class="price-block price-block--sub">
+                <span class="price-label">Suggested ad budget</span>
+                <strong class="price-value">{pkg.adBudget}</strong>
+                <span class="price-note">Additional & transparent</span>
+              </div>
+            </div>
+
+            <details class="pkg-card__details">
+              <summary>What's included <span aria-hidden="true">↓</span></summary>
+              <ul class="pkg-card__includes">
+                {pkg.includes.map((item) => <li>{item}</li>)}
+              </ul>
+            </details>
+
+            <details class="pkg-card__details">
+              <summary>Ideal for <span aria-hidden="true">↓</span></summary>
+              <ul class="pkg-card__includes">
+                {pkg.idealFor.map((item) => <li>{item}</li>)}
+              </ul>
+            </details>
+
+            <details class="pkg-card__details">
+              <summary>What to expect <span aria-hidden="true">↓</span></summary>
+              <p class="pkg-card__expect">{pkg.whatToExpect}</p>
+            </details>
+
+            {pkg.note && (
+              <aside class="pkg-card__note">
+                <p>{pkg.note}</p>
+              </aside>
+            )}
+
+            <ButtonLink href={buildWhatsAppUrl(pkg.whatsAppMessage)}>
+              Choose {pkg.name} <span class="sr-only">— open WhatsApp</span>
+            </ButtonLink>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--raised add-ons" id="add-ons">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Pay per job"
+        title="Add-on services"
+        description="Available to any client regardless of package. Billed separately per job."
+      />
+
+      <div class="addons-grid">
+        {addOns.map((addon) => (
+          <div class="addon-item">
+            <span class="addon-name">{addon.name}</span>
+            <span class="addon-price">{addon.price}</span>
+            {addon.unit && <span class="addon-unit">{addon.unit}</span>}
+          </div>
+        ))}
+        <div class="addon-item addon-item--custom">
+          <span class="addon-name">Ad management (standalone)</span>
+          <span class="addon-price">From $50/mo</span>
+        </div>
+        <div class="addon-item addon-item--custom">
+          <span class="addon-name">Custom project</span>
+          <span class="addon-price">Quoted on request</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container faq-section">
+      <SectionHeading
+        eyebrow="Common questions"
+        title="Frequently asked questions"
+      />
+      <FaqList items={packageFaqs} />
+    </div>
+  </section>
+
+  <section class="section section--raised final-cta">
+    <div class="container final-cta__inner">
+      <p class="eyebrow">Ready to start?</p>
+      <h2>Not sure which package fits?</h2>
+      <p>A free growth audit helps frame the right starting point based on your business, your goals, and what makes practical sense right now.</p>
+      <ButtonLink href={buildWhatsAppUrl()}>Get a free growth audit</ButtonLink>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-top: clamp(var(--space-8), 10vw, var(--space-10));
+  }
+
+  .page-hero .container {
+    display: grid;
+    gap: var(--space-5);
+    max-width: 56rem;
+    justify-items: start;
+  }
+
+  .page-hero h1 {
+    max-width: 18ch;
+  }
+
+  .page-hero__sub {
+    max-width: 46rem;
+    color: var(--color-muted);
+    font-size: clamp(1rem, 2vw, 1.15rem);
+  }
+
+  /* Explainer */
+  .explainer {
+    padding-block: clamp(var(--space-7), 7vw, var(--space-8));
+  }
+
+  .explainer__grid {
+    display: grid;
+    gap: var(--space-4);
+    align-items: start;
+    margin-bottom: var(--space-5);
+  }
+
+  .explainer__item {
+    display: grid;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    background: rgb(5 3 10 / 60%);
+  }
+
+  .explainer__icon {
+    width: 3rem;
+    height: 3rem;
+    display: grid;
+    place-items: center;
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    background: rgb(124 33 245 / 10%);
+    color: var(--color-violet);
+  }
+
+  .explainer__icon--cyan {
+    background: rgb(18 221 243 / 8%);
+    color: var(--color-cyan);
+  }
+
+  .explainer__icon svg {
+    width: 1.5rem;
+  }
+
+  .explainer__title {
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.2em 0.6em;
+    background: rgb(18 221 243 / 15%);
+    color: var(--color-cyan);
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: var(--radius-sm);
+  }
+
+  .explainer__item p {
+    color: var(--color-muted);
+  }
+
+  .explainer__separator {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--color-magenta);
+    opacity: 0.6;
+  }
+
+  .explainer__note {
+    color: var(--color-muted);
+    font-size: 0.82rem;
+    border-left: 2px solid var(--color-magenta);
+    padding-left: var(--space-4);
+  }
+
+  /* Packages grid */
+  .packages-grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .pkg-card {
+    display: grid;
+    gap: var(--space-4);
+    padding: clamp(var(--space-5), 4vw, var(--space-6));
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    background: linear-gradient(145deg, rgb(16 10 28 / 94%), rgb(11 7 18 / 80%));
+  }
+
+  .pkg-card--featured {
+    border-color: rgb(242 14 207 / 50%);
+    box-shadow: 0 0 3rem rgb(242 14 207 / 10%);
+  }
+
+  .pkg-card--cyan { border-top: 2px solid var(--color-cyan); }
+  .pkg-card--violet { border-top: 2px solid var(--color-violet); }
+  .pkg-card--magenta { border-top: 2px solid var(--color-magenta); }
+
+  .pkg-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .pkg-card__tier {
+    color: var(--color-muted);
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+  }
+
+  .pkg-card__badge {
+    padding: 0.25em 0.7em;
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: var(--radius-sm);
+  }
+
+  .badge--cyan { background: rgb(18 221 243 / 15%); color: var(--color-cyan); }
+  .badge--violet { background: rgb(124 33 245 / 18%); color: #b87aff; }
+  .badge--magenta { background: rgb(242 14 207 / 15%); color: var(--color-magenta); }
+
+  .pkg-card__name {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin: 0;
+  }
+
+  .pkg-card__summary {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    max-width: 44rem;
+  }
+
+  .pkg-card__pricing {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+    padding-block: var(--space-4);
+    border-block: var(--border);
+  }
+
+  .price-block {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .price-label {
+    color: var(--color-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .price-value {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 3vw, 1.55rem);
+  }
+
+  .price-block--sub .price-value {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--color-muted);
+  }
+
+  .price-note {
+    color: var(--color-muted);
+    font-size: 0.7rem;
+  }
+
+  .pkg-card__details {
+    border-top: var(--border);
+    padding-top: var(--space-3);
+  }
+
+  .pkg-card__details summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    list-style: none;
+    padding-bottom: var(--space-2);
+    color: var(--color-muted);
+    transition: color 140ms ease;
+  }
+
+  .pkg-card__details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .pkg-card__details summary:hover {
+    color: var(--color-text);
+  }
+
+  .pkg-card__details summary span {
+    font-size: 0.7rem;
+    transition: transform 180ms ease;
+  }
+
+  .pkg-card__details[open] summary span {
+    transform: rotate(180deg);
+  }
+
+  .pkg-card__includes {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-3) 0 var(--space-3) 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .pkg-card__includes li {
+    position: relative;
+    padding-left: var(--space-5);
+    font-size: 0.88rem;
+    color: var(--color-muted);
+  }
+
+  .pkg-card__includes li::before {
+    position: absolute;
+    left: 0.25rem;
+    top: 0.4em;
+    content: '';
+    width: 0.4rem;
+    height: 0.4rem;
+    background: var(--color-cyan);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+
+  .pkg-card__expect {
+    font-size: 0.88rem;
+    color: var(--color-muted);
+    padding-block: var(--space-3);
+  }
+
+  .pkg-card__note {
+    padding: var(--space-3) var(--space-4);
+    border-left: 2px solid var(--color-violet);
+    background: rgb(124 33 245 / 6%);
+  }
+
+  .pkg-card__note p {
+    color: var(--color-muted);
+    font-size: 0.82rem;
+  }
+
+  /* Add-ons */
+  .addons-grid {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .addon-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    background: rgb(5 3 10 / 50%);
+    flex-wrap: wrap;
+  }
+
+  .addon-name {
+    flex: 1;
+    font-weight: 700;
+  }
+
+  .addon-price {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--color-cyan);
+  }
+
+  .addon-unit {
+    color: var(--color-muted);
+    font-size: 0.78rem;
+  }
+
+  .addon-item--custom .addon-price {
+    color: var(--color-muted);
+  }
+
+  .faq-section {
+    max-width: 56rem;
+  }
+
+  .final-cta__inner {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-5);
+    text-align: center;
+    padding: clamp(var(--space-6), 7vw, var(--space-9));
+    border: 1px solid rgb(124 33 245 / 30%);
+    border-radius: var(--radius-angular);
+    background: linear-gradient(120deg, rgb(124 33 245 / 10%), transparent 50%, rgb(18 221 243 / 6%)), var(--color-raised);
+  }
+
+  .final-cta__inner h2 {
+    max-width: 20ch;
+  }
+
+  .final-cta__inner p:not(.eyebrow) {
+    max-width: 40rem;
+    color: var(--color-muted);
+  }
+
+  @media (min-width: 40rem) {
+    .addons-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 50rem) {
+    .explainer__grid {
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+    }
+
+    .explainer__separator {
+      display: flex;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .packages-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .addons-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

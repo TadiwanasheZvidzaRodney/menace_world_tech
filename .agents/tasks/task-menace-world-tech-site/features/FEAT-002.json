@@ -1,0 +1,28 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "description": "Complete the Services, Packages, About, Contact, and 404 routes on FEAT-001's shared system, add the progressive WhatsApp audit flow, and finish production smoke validation/documentation. This feature depends on FEAT-001's data, layout, styles, and reusable components.",
+  "status": "pending",
+  "steps": [
+    "Implement plan.md item 3 in src/pages/services.astro and src/pages/about.astro: render all eight anchored services and the exact Zimbabwe-based mission, vision, five values, Facebook-first/channel-fit positioning, cautious outcomes, and audit CTAs through BaseLayout.",
+    "Implement plan.md item 4 in src/pages/packages.astro using PackageCard and FaqList: render the four exact USD management ranges and separate ad budgets, all five exact add-ons, the management-versus-ad-spend explanation, and FAQs for fees, onboarding/payment, approvals, platforms, ownership, and variable realistic results.",
+    "Implement plan.md item 5 in src/components/ContactForm.astro and src/pages/contact.astro: include every requested field, native validation/help/live status, safely encoded enhanced WhatsApp submission to 263783980802, usable GET/direct-link no-JS fallback, click-to-call, exact audit expectations, and concise next steps without pressure or guarantees.",
+    "Implement plan.md item 6: add src/pages/404.astro, public/robots.txt, scripts/verify-build.mjs, the package.json verify script, and a replacement README.md covering setup, scripts, deployment/SITE_URL, content/contact locations, and future optimized real-campaign asset replacement.",
+    "Run npm run verify and the prescribed background dev-server responsive/keyboard/reduced-motion/no-JS audit across all six routes; fix issues without adding invented facts or external placeholders, set this FEAT status to completed, and record verification evidence/caveats in findings."
+  ],
+  "acceptance_criteria": [
+    "npm run verify builds and validates /, /services, /packages, /about, /contact, and the custom /404.html with no broken local asset or internal page target.",
+    "The Services route covers social media marketing, paid advertising, website design, AI chatbot development, cloud services, packaging/brand design, content creation, and community management without guaranteed outcomes.",
+    "The Packages route shows Starter Presence $60-$150/mo plus $20-$50 ads, Growth Engagement $120-$300/mo plus $50-$150 ads, Business Boost $250-$500/mo plus $100-$300 ads, and Premium $400-$600/mo plus $200+ ads, all in USD with ad spend additional/agreed/transparent, plus every exact add-on and required FAQ topic.",
+    "The About route uses the exact small-business headline, Zimbabwe-based positioning, mission/vision, five named values, and qualified Facebook-first channel strategy without unsourced statistics.",
+    "The Contact route consistently shows +263 78 3980 802, tel:+263783980802, and wa.me/263783980802; enhanced submission safely encodes all supplied form data, and no-JS users retain a useful WhatsApp fallback.",
+    "All pages have unique title/description/Open Graph metadata through BaseLayout, semantic heading order, visible focus, sufficient contrast, bounded responsive layouts, reduced-motion support, and no fake testimonials/logos/metrics, lorem, TODOs, dead links, or remote stock placeholders.",
+    "README.md accurately documents local setup, scripts, dist output, static deployment and optional SITE_URL, edit locations, and replacement of concept SVG/CSS with permissioned optimized real campaign images and alt text."
+  ],
+  "verification": [
+    "npm run verify",
+    "npm run astro -- dev --background; inspect all routes at 360px, 768px, 1280px, and 1600px with keyboard, reduced-motion, and no-JS contact states; npm run astro -- dev stop"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

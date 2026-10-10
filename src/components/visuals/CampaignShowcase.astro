@@ -1,0 +1,156 @@
+<figure class="showcase">
+	<div class="showcase__art" aria-hidden="true">
+		<div class="showcase__rail">
+			<span>MWT / CONCEPT 01</span>
+			<span>LOCAL-FIRST GROWTH</span>
+		</div>
+		<div class="showcase__canvas">
+			<div class="showcase__signal">Signal<br />over noise.</div>
+			<div class="showcase__orbit"></div>
+			<div class="showcase__post">
+				<span>CONTENT SYSTEM</span>
+				<strong>Show up<br />with purpose.</strong>
+				<small>Plan · Create · Publish · Learn</small>
+			</div>
+			<div class="showcase__stat"><span>FOCUS</span><strong>RIGHT MESSAGE</strong></div>
+		</div>
+	</div>
+	<figcaption>
+		<strong>Menace World Tech concept creative</strong>
+		<span>Original art exploring a campaign direction—not client work or a performance claim.</span>
+	</figcaption>
+</figure>
+
+<style>
+	.showcase {
+		margin: 0;
+	}
+
+	.showcase__art {
+		position: relative;
+		display: grid;
+		grid-template-columns: 2.5rem 1fr;
+		min-height: 28rem;
+		border: var(--border);
+		border-radius: var(--radius-angular);
+		background: var(--color-panel);
+		box-shadow: var(--glow-cyan);
+		overflow: hidden;
+	}
+
+	.showcase__rail {
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		flex-direction: column;
+		border-right: var(--border);
+		background: var(--color-violet);
+		color: var(--color-text);
+		font-size: 0.55rem;
+		font-weight: 900;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+	}
+
+	.showcase__rail span {
+		writing-mode: vertical-rl;
+		transform: rotate(180deg);
+	}
+
+	.showcase__canvas {
+		position: relative;
+		background:
+			linear-gradient(rgb(247 245 255 / 5%) 1px, transparent 1px),
+			linear-gradient(90deg, rgb(247 245 255 / 5%) 1px, transparent 1px),
+			radial-gradient(circle at 75% 35%, rgb(242 14 207 / 25%), transparent 13rem),
+			#08050f;
+		background-size: 2.5rem 2.5rem, 2.5rem 2.5rem, auto, auto;
+		overflow: hidden;
+	}
+
+	.showcase__signal {
+		position: absolute;
+		top: 8%;
+		left: 6%;
+		z-index: 2;
+		font-family: var(--font-display);
+		font-size: clamp(1.3rem, 4vw, 2.8rem);
+		line-height: 0.95;
+		text-transform: uppercase;
+	}
+
+	.showcase__orbit {
+		position: absolute;
+		top: 7%;
+		right: -5%;
+		width: clamp(13rem, 34vw, 24rem);
+		aspect-ratio: 1;
+		border: 1.4rem solid rgb(124 33 245 / 34%);
+		border-right-color: var(--color-magenta);
+		border-radius: 50%;
+		transform: rotate(-22deg);
+	}
+
+	.showcase__post {
+		position: absolute;
+		right: 10%;
+		bottom: 9%;
+		z-index: 3;
+		display: grid;
+		width: min(66%, 22rem);
+		gap: var(--space-3);
+		padding: clamp(var(--space-4), 4vw, var(--space-6));
+		border: 1px solid rgb(18 221 243 / 55%);
+		background: rgb(5 3 10 / 92%);
+		box-shadow: 1rem 1rem 0 rgb(124 33 245 / 28%);
+	}
+
+	.showcase__post span,
+	.showcase__post small,
+	.showcase__stat span {
+		color: var(--color-cyan);
+		font-size: 0.58rem;
+		font-weight: 850;
+		letter-spacing: 0.13em;
+		text-transform: uppercase;
+	}
+
+	.showcase__post strong {
+		font-family: var(--font-display);
+		font-size: clamp(1.25rem, 4vw, 2.2rem);
+		line-height: 0.95;
+		text-transform: uppercase;
+	}
+
+	.showcase__stat {
+		position: absolute;
+		bottom: 10%;
+		left: 5%;
+		display: grid;
+		gap: var(--space-1);
+		transform: rotate(-90deg) translateY(100%);
+		transform-origin: bottom left;
+	}
+
+	.showcase__stat strong {
+		font-size: 0.7rem;
+		letter-spacing: 0.08em;
+	}
+
+	figcaption {
+		display: grid;
+		gap: var(--space-1);
+		padding-top: var(--space-4);
+		font-size: 0.82rem;
+	}
+
+	figcaption strong {
+		color: var(--color-cyan);
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+	}
+
+	figcaption span {
+		color: var(--color-muted);
+	}
+</style>

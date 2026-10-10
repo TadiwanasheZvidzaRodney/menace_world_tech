@@ -1,0 +1,371 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ButtonLink from '../components/ButtonLink.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { PHONE_DISPLAY, PHONE_E164, WHATSAPP_NUMBER } from '../data/site';
+import { buildCallUrl, buildWhatsAppUrl, FREE_AUDIT_MESSAGE } from '../lib/whatsapp';
+
+const auditUrl = buildWhatsAppUrl();
+const callUrl = buildCallUrl();
+
+const auditSteps = [
+  {
+    step: '01',
+    title: 'Quick page review',
+    description: 'A fast look at your current social presence and online footprint to identify obvious gaps and practical opportunities.',
+  },
+  {
+    step: '02',
+    title: '2–3 practical improvements',
+    description: 'Specific, actionable recommendations based on what actually applies to your business — not a generic checklist.',
+  },
+  {
+    step: '03',
+    title: 'A clear next step',
+    description: 'A straightforward conversation about what could make sense going forward. No pressure, no hard sell — just clarity.',
+  },
+];
+
+const faqItems = [
+  {
+    q: 'Is the growth audit really free?',
+    a: 'Yes — no strings attached. It is a practical way to start a conversation and make sure there is a real fit before either party commits to anything.',
+  },
+  {
+    q: 'How quickly will you respond?',
+    a: 'Most WhatsApp messages receive a reply within a few hours during working hours. For audit requests, expect an initial response within one business day.',
+  },
+  {
+    q: 'Do I need to have a business page already?',
+    a: 'No. The audit works with or without an existing presence. If you are starting from scratch, that is a useful data point too.',
+  },
+  {
+    q: 'What happens after the audit?',
+    a: 'If the conversation reveals a clear fit, a service proposal or package recommendation is shared. You decide whether to proceed — on your terms and timeline.',
+  },
+];
+---
+
+<BaseLayout
+  title="Contact"
+  description="Request a free growth audit from Menace World Tech. WhatsApp +263 78 3980 802 or complete the form below."
+>
+
+  <section class="page-hero section">
+    <div class="container">
+      <p class="eyebrow">Free growth audit</p>
+      <h1>Let's find your<br /><span class="gradient-text">next opportunity.</span></h1>
+      <p class="page-hero__sub">Start with a free, practical review of your current online presence. No pressure. No jargon. Just a clear conversation about what could make sense for your business.</p>
+    </div>
+  </section>
+
+  <section class="contact-section section" aria-label="Contact options and form">
+    <div class="container contact-grid">
+
+      <div class="contact-sidebar">
+        <div class="cta-block cta-block--wa">
+          <div class="cta-block__icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 2C8.27 2 2 8.27 2 16c0 2.52.68 4.93 1.96 7.04L2 30l7.17-1.88A13.93 13.93 0 0 0 16 30c7.73 0 14-6.27 14-14S23.73 2 16 2Zm7.27 19.38c-.3.83-1.77 1.6-2.41 1.64-.64.05-1.25.29-4.22-.88-3.57-1.4-5.84-5.03-6.01-5.26-.17-.23-1.37-1.82-1.37-3.47s.87-2.47 1.17-2.8c.3-.33.66-.41.87-.41h.63c.2 0 .48-.08.74.57l1.06 2.67c.1.26.05.56-.12.8l-.6.84c-.17.23-.35.49-.15.93.5 1.06 1.21 2 2.09 2.76.99.85 2.12 1.42 3.36 1.66.4.08.63-.03.86-.29l.76-.9c.23-.27.46-.2.77-.12l2.65 1.25c.31.14.52.21.6.33.08.12.08.7-.22 1.51Z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="cta-block__label">WhatsApp (primary)</p>
+            <a
+              href={auditUrl}
+              class="cta-block__number"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {PHONE_DISPLAY}
+            </a>
+            <p class="cta-block__hint">Opens WhatsApp with a prepared message.</p>
+          </div>
+        </div>
+
+        <div class="cta-block">
+          <div class="cta-block__icon cta-block__icon--call" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M27.6 20.8c-1.4-1.4-3.1-1.4-4.5 0l-1.4 1.4c-1.2-.6-3.6-2-5.8-4.2-2.2-2.2-3.6-4.6-4.2-5.8l1.4-1.4c1.4-1.4 1.4-3.1 0-4.5L10.8 4c-1.4-1.4-3.1-1.4-4.5 0L4.7 5.6C3.4 6.9 2.9 8.6 3.2 10.5c.7 4.2 3.7 9 7.6 12.9 4 4 8.7 7 12.9 7.6.4.1.8.1 1.2.1 1.6 0 3-.6 3.9-1.6l1.6-1.6c1.4-1.5 1.4-3.2 0-4.6l-2.8-2.5Z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="cta-block__label">Call</p>
+            <a href={callUrl} class="cta-block__number">{PHONE_DISPLAY}</a>
+            <p class="cta-block__hint">Available during business hours.</p>
+          </div>
+        </div>
+
+        <div class="audit-explainer">
+          <h2 class="audit-explainer__title">What happens in the free audit</h2>
+          <ol class="audit-steps">
+            {auditSteps.map((step) => (
+              <li class="audit-step">
+                <span class="audit-step__num" aria-hidden="true">{step.step}</span>
+                <div>
+                  <strong>{step.title}</strong>
+                  <p>{step.description}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <aside class="audit-note">
+          <p>The audit delivers clarity and a practical starting point — not a guaranteed outcome. Results from social media marketing vary based on offer, market, budget, and execution.</p>
+        </aside>
+      </div>
+
+      <div class="contact-form-col">
+        <div class="form-header">
+          <h2>Request your free growth audit</h2>
+          <p>Complete the form and we will respond via WhatsApp, usually within one business day. All fields marked <span class="req-marker" aria-label="required">*</span> are required.</p>
+        </div>
+        <ContactForm />
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section section--raised faq" id="faq">
+    <div class="container faq-inner">
+      <h2 class="faq-title">Quick answers</h2>
+      <div class="faq-grid">
+        {faqItems.map((item) => (
+          <div class="faq-item">
+            <h3>{item.q}</h3>
+            <p>{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-top: clamp(var(--space-8), 10vw, var(--space-10));
+  }
+
+  .page-hero .container {
+    display: grid;
+    gap: var(--space-5);
+    max-width: 56rem;
+    justify-items: start;
+  }
+
+  .page-hero h1 {
+    max-width: 16ch;
+  }
+
+  .page-hero__sub {
+    max-width: 46rem;
+    color: var(--color-muted);
+    font-size: clamp(1rem, 2vw, 1.15rem);
+  }
+
+  .contact-grid {
+    display: grid;
+    gap: clamp(var(--space-7), 8vw, var(--space-9));
+    align-items: start;
+  }
+
+  /* Sidebar */
+  .contact-sidebar {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .cta-block {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    background: rgb(16 10 28 / 80%);
+  }
+
+  .cta-block--wa {
+    border-color: rgb(18 221 243 / 30%);
+    background: linear-gradient(135deg, rgb(18 221 243 / 6%), rgb(16 10 28 / 90%));
+  }
+
+  .cta-block__icon {
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-sm);
+    background: rgb(18 221 243 / 14%);
+    color: var(--color-cyan);
+  }
+
+  .cta-block__icon--call {
+    background: rgb(124 33 245 / 14%);
+    color: var(--color-violet);
+  }
+
+  .cta-block__icon svg {
+    width: 1.4rem;
+  }
+
+  .cta-block__label {
+    color: var(--color-muted);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-1);
+  }
+
+  .cta-block__number {
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    font-weight: 900;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: color 140ms ease;
+  }
+
+  .cta-block__number:hover {
+    color: var(--color-cyan);
+  }
+
+  .cta-block__hint {
+    margin-top: var(--space-1);
+    color: var(--color-muted);
+    font-size: 0.75rem;
+  }
+
+  .audit-explainer {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .audit-explainer__title {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--color-text);
+  }
+
+  .audit-steps {
+    display: grid;
+    gap: var(--space-4);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .audit-step {
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+  }
+
+  .audit-step__num {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    background: rgb(242 14 207 / 12%);
+    border: 1px solid rgb(242 14 207 / 30%);
+    border-radius: var(--radius-sm);
+    color: var(--color-magenta);
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 900;
+  }
+
+  .audit-step strong {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: var(--space-1);
+  }
+
+  .audit-step p {
+    color: var(--color-muted);
+    font-size: 0.85rem;
+  }
+
+  .audit-note {
+    padding: var(--space-4);
+    border-left: 2px solid var(--color-violet);
+    background: rgb(124 33 245 / 6%);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .audit-note p {
+    color: var(--color-muted);
+    font-size: 0.82rem;
+  }
+
+  /* Form column */
+  .form-header {
+    display: grid;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .form-header h2 {
+    font-size: clamp(1.35rem, 3vw, 1.8rem);
+  }
+
+  .form-header p {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+
+  .req-marker {
+    color: var(--color-magenta);
+    font-weight: 900;
+  }
+
+  /* FAQ */
+  .faq-inner {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .faq-title {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+  }
+
+  .faq-grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .faq-item {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-5);
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    background: rgb(5 3 10 / 50%);
+  }
+
+  .faq-item h3 {
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  }
+
+  .faq-item p {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 40rem) {
+    .faq-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .contact-grid {
+      grid-template-columns: 0.72fr 1.28fr;
+    }
+  }
+</style>

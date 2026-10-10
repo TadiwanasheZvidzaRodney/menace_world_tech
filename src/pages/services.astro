@@ -1,0 +1,416 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ButtonLink from '../components/ButtonLink.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { services } from '../data/services';
+import { buildWhatsAppUrl } from '../lib/whatsapp';
+
+const auditUrl = buildWhatsAppUrl();
+
+const serviceDetails = [
+  {
+    id: 'social-media-marketing',
+    eyebrow: 'Foundation of reach',
+    title: 'Social media marketing',
+    description: 'Channel-aware, consistent execution built around your specific business context. Facebook leads reach in Zimbabwe, while Instagram and TikTok drive engagement with younger audiences. Channels are selected based on where your customers actually spend time — not added by default.',
+    deliverables: [
+      'Strategy shaped around your offer, audience, and practical resources',
+      'Branded content calendar shared ahead of each month',
+      'Captions, hashtags, and platform-aware copy',
+      'Page optimisation and profile setup where needed',
+      'Monthly performance overview with clear context',
+    ],
+    note: 'Outcomes vary based on offer, timing, content quality, and platform algorithm changes. The focus is consistent, practical execution — not promised follower counts.',
+  },
+  {
+    id: 'paid-advertising',
+    eyebrow: 'Paid reach',
+    title: 'Paid advertising',
+    description: 'Campaign strategy, creative briefing, setup, targeting, and ongoing optimisation with transparent ad-spend reporting. The management fee covers the work; the ad budget is separate, agreed upfront, and reported in full.',
+    deliverables: [
+      'Campaign objective and audience strategy',
+      'Ad creative direction and copy',
+      'Setup, targeting, and active monitoring',
+      'A/B testing on creative and audiences at higher tiers',
+      'Retargeting for warm audiences where applicable',
+      'Transparent reporting on spend, reach, and campaign actions',
+    ],
+    note: 'Results depend on offer quality, ad budget, audience size, and platform conditions. Menace World Tech commits to strategy, execution, and transparent reporting — not guaranteed sales or leads.',
+  },
+  {
+    id: 'content-creation',
+    eyebrow: 'What fills the feed',
+    title: 'Content creation',
+    description: 'Platform-ready concepts, copy, graphics, and short-form video edits built from an agreed monthly plan. Imagery and brand assets are supplied by the client; Menace World Tech shapes them into consistent, on-brand content.',
+    deliverables: [
+      'Monthly content plan aligned to objectives',
+      'Branded graphics for posts and stories',
+      'Captions written for clarity and platform context',
+      'Short-form Reels and TikTok-style vertical video at growth tiers',
+      'Content repurposing across platforms at higher packages',
+    ],
+    note: 'A 48-hour approval window is built into the workflow each month so the client can review before anything is published.',
+  },
+  {
+    id: 'community-management',
+    eyebrow: 'Active presence',
+    title: 'Community management',
+    description: 'Consistent publishing and thoughtful response support that keeps the business present, responsive, and professional across its channels. DMs, comments, and enquiries are handled within agreed response guidelines.',
+    deliverables: [
+      'Consistent scheduling and publishing',
+      'Comment and DM replies within agreed scope and hours',
+      'Flagging of complex enquiries or sales leads to the client',
+      'Community tone maintained within agreed guidelines',
+    ],
+    note: 'The client is responsible for finalising any sales or service conversations that go beyond the agreed support scope.',
+  },
+  {
+    id: 'website-design',
+    eyebrow: 'A credible digital home',
+    title: 'Website design & development',
+    description: 'Clear, responsive websites that make it easy for a visitor to understand your offer, trust your business, and take the next step. Built for mobile, fast to load, and ready to generate enquiries — whether you need a landing page, service site, or e-commerce store.',
+    deliverables: [
+      'Discovery session to understand the business and visitor goal',
+      'Responsive design matched to brand identity',
+      'Clear call-to-action and lead-capture pathways',
+      'Contact forms or WhatsApp integration',
+      'Basic SEO setup, sitemap, and Google Analytics connection',
+      'Client handover and training for content updates',
+    ],
+    note: 'Website pricing is scoped per project. Contact for a conversation about what makes sense for your business.',
+  },
+  {
+    id: 'ai-chatbot-development',
+    eyebrow: 'Smart automation',
+    title: 'AI chatbots & automation',
+    description: 'Practical conversation flows that handle common business enquiries at any hour — without requiring staff. Built for the specific questions your business receives and integrated into the channels your customers already use.',
+    deliverables: [
+      'Common customer enquiry mapping and flow design',
+      'Chatbot deployment on website, Facebook Messenger, or WhatsApp',
+      'Multilingual response support where relevant',
+      'Escalation path to a human for complex conversations',
+      'Basic analytics to identify most common queries',
+    ],
+    note: 'Chatbots handle common, structured enquiries well. They are not a replacement for real sales conversations — they remove the repetitive load so your team can focus on what matters.',
+  },
+  {
+    id: 'packaging-brand-design',
+    eyebrow: 'Visual identity & print',
+    title: 'Packaging & brand design',
+    description: 'Practical visual systems, packaging design, and print-ready artwork that help a business show up consistently. Logos, brand marks, flyers, posters, and business stationery designed with clarity, print viability, and brand consistency in mind.',
+    deliverables: [
+      'Logo design and brand mark development',
+      'Brand colour, typography, and usage guidelines',
+      'Packaging design for product or retail use',
+      'Flyer, banner, and promotional print materials',
+      'Social media templates aligned to brand identity',
+    ],
+    note: 'Design work is scoped and quoted per project. Prices for common items are listed on the packages page under add-ons.',
+  },
+  {
+    id: 'cloud-services',
+    eyebrow: 'Business infrastructure',
+    title: 'Cloud & digital support',
+    description: 'Setup and support for the cloud tools, data storage, app hosting, and digital infrastructure your business actually needs to run effectively. Scoped around the practical requirements — not the most complex option.',
+    deliverables: [
+      'Cloud storage and file management setup',
+      'Business email, productivity, and collaboration tooling',
+      'App and website hosting configuration',
+      'Basic backup and recovery planning',
+      'Support for scaling or migrating existing digital systems',
+    ],
+    note: 'Cloud and infrastructure work is scoped per engagement based on the tools the business uses and the outcomes it needs.',
+  },
+];
+---
+
+<BaseLayout
+  title="Services"
+  description="Social media marketing, paid advertising, content creation, website design, AI chatbots, cloud support, and brand design for small businesses in Zimbabwe."
+>
+
+  <section class="page-hero section">
+    <div class="container">
+      <p class="eyebrow">Connected capabilities</p>
+      <h1>Taking your business<br /><span class="gradient-text">to another dimension.</span></h1>
+      <p class="page-hero__sub">Focused support for each stage of growth, or a connected system across all of them. Everything starts with what makes sense for your business.</p>
+      <ButtonLink href={auditUrl}>Discuss your situation</ButtonLink>
+    </div>
+  </section>
+
+  <section class="capabilities-bar" aria-label="Services overview">
+    <div class="container">
+      <ul>
+        {serviceDetails.map((s) => (
+          <li><a href={`#${s.id}`}>{s.title}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {serviceDetails.map((svc, i) => (
+    <section
+      id={svc.id}
+      class:list={['service-section section', { 'service-section--alt': i % 2 !== 0 }]}
+    >
+      <div class="container service-section__grid">
+        <div class="service-section__content">
+          <p class="eyebrow">{svc.eyebrow}</p>
+          <h2>{svc.title}</h2>
+          <p class="service-section__desc">{svc.description}</p>
+
+          <div class="service-section__deliverables">
+            <p class="deliverables-label">What's included</p>
+            <ul>
+              {svc.deliverables.map((d) => <li>{d}</li>)}
+            </ul>
+          </div>
+
+          {svc.note && (
+            <aside class="service-note">
+              <span aria-hidden="true">◆</span>
+              <p>{svc.note}</p>
+            </aside>
+          )}
+
+          <ButtonLink href={auditUrl} variant="secondary">
+            Talk about {svc.title.toLowerCase()}
+          </ButtonLink>
+        </div>
+
+        <div class="service-section__badge" aria-hidden="true">
+          <div class="badge-inner">
+            <span class="badge-num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="badge-label">{svc.eyebrow}</span>
+            <svg viewBox="0 0 64 64" fill="none">
+              <polygon points="32,4 60,54 4,54" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+              <circle cx="32" cy="32" r="16" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+              <line x1="32" y1="2" x2="32" y2="62" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+              <line x1="2" y1="32" x2="62" y2="32" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section section--raised final-cta">
+    <div class="container final-cta__inner">
+      <SectionHeading
+        eyebrow="Start here"
+        title="Not sure where to begin?"
+        description="A free growth audit is a short, practical review of your current online presence. No jargon, no pressure — just a clear conversation about what might work for your business."
+        align="center"
+      />
+      <ButtonLink href={auditUrl}>Get your free growth audit</ButtonLink>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-top: clamp(var(--space-8), 10vw, var(--space-10));
+  }
+
+  .page-hero .container {
+    display: grid;
+    gap: var(--space-5);
+    max-width: 56rem;
+    justify-items: start;
+  }
+
+  .page-hero h1 {
+    max-width: 16ch;
+  }
+
+  .page-hero__sub {
+    max-width: 44rem;
+    color: var(--color-muted);
+    font-size: clamp(1rem, 2vw, 1.15rem);
+  }
+
+  .capabilities-bar {
+    border-block: var(--border);
+    background: rgb(11 7 18 / 72%);
+    padding-block: var(--space-4);
+  }
+
+  .capabilities-bar ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .capabilities-bar li a {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 140ms ease;
+  }
+
+  .capabilities-bar li a:hover {
+    color: var(--color-cyan);
+  }
+
+  .service-section__grid {
+    display: grid;
+    gap: clamp(var(--space-7), 8vw, var(--space-9));
+    align-items: center;
+  }
+
+  .service-section--alt {
+    background: linear-gradient(145deg, rgb(16 10 28 / 40%), transparent);
+  }
+
+  .service-section__content {
+    display: grid;
+    gap: var(--space-5);
+    justify-items: start;
+  }
+
+  .service-section__desc {
+    color: var(--color-muted);
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    max-width: 44rem;
+  }
+
+  .service-section__deliverables {
+    display: grid;
+    gap: var(--space-3);
+    width: 100%;
+  }
+
+  .deliverables-label {
+    color: var(--color-cyan);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .service-section__deliverables ul {
+    display: grid;
+    gap: var(--space-3);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .service-section__deliverables li {
+    position: relative;
+    padding-left: var(--space-5);
+    color: var(--color-text);
+    font-size: 0.95rem;
+  }
+
+  .service-section__deliverables li::before {
+    position: absolute;
+    left: 0;
+    top: 0.4em;
+    content: '';
+    width: 0.55rem;
+    height: 0.55rem;
+    background: var(--color-magenta);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+
+  .service-note {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-5);
+    border-left: 2px solid var(--color-violet);
+    background: rgb(124 33 245 / 6%);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .service-note span {
+    color: var(--color-violet);
+    font-size: 0.65rem;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+  }
+
+  .service-note p {
+    color: var(--color-muted);
+    font-size: 0.85rem;
+  }
+
+  .service-section__badge {
+    display: none;
+  }
+
+  .badge-inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    width: 18rem;
+    height: 18rem;
+    border: 1px solid rgb(124 33 245 / 30%);
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, rgb(16 10 28 / 90%), rgb(5 3 10 / 60%));
+    box-shadow: var(--glow-violet), inset 0 0 3rem rgb(124 33 245 / 5%);
+    color: var(--color-violet);
+    margin: auto;
+  }
+
+  .badge-inner svg {
+    width: 10rem;
+    color: var(--color-cyan);
+  }
+
+  .badge-num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
+  .badge-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .final-cta__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @media (min-width: 64rem) {
+    .service-section__grid {
+      grid-template-columns: 1.2fr 0.8fr;
+    }
+
+    .service-section--alt .service-section__grid {
+      grid-template-columns: 0.8fr 1.2fr;
+    }
+
+    .service-section--alt .service-section__content {
+      order: 2;
+    }
+
+    .service-section--alt .service-section__badge {
+      order: 1;
+    }
+
+    .service-section__badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+</style>

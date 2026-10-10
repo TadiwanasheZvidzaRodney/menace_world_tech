@@ -1,0 +1,10 @@
+{
+  "task_id": "task-menace-world-tech-site",
+  "task_description": "Build a complete, polished, production-ready static Astro website for Menace World Tech with six routes, an original cyber-growth visual system, exact service/package content, and backend-free WhatsApp contact flow.",
+  "status": "pending",
+  "feature_order": [
+    "FEAT-001",
+    "FEAT-002"
+  ],
+  "blocked_reason": null
+}

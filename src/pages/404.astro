@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ButtonLink from '../components/ButtonLink.astro';
+import { buildWhatsAppUrl } from '../lib/whatsapp';
+
+const auditUrl = buildWhatsAppUrl();
+---
+
+<BaseLayout
+  title="Page not found"
+  description="The page you're looking for doesn't exist. Navigate back to Menace World Tech."
+>
+  <section class="notfound section">
+    <div class="container notfound__inner">
+      <div class="notfound__visual" aria-hidden="true">
+        <svg viewBox="0 0 160 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="50%" y="68" dominant-baseline="middle" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="72" font-weight="900" fill="url(#nf-grad)" opacity="0.18">404</text>
+          <defs>
+            <linearGradient id="nf-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#7C21F5"/>
+              <stop offset="100%" stop-color="#F20ECF"/>
+            </linearGradient>
+          </defs>
+          <line x1="20" y1="50" x2="140" y2="50" stroke="#12DDF3" stroke-width="0.5" stroke-dasharray="3 4" opacity="0.4"/>
+          <circle cx="80" cy="50" r="28" stroke="#7C21F5" stroke-width="1" opacity="0.3"/>
+          <path d="M66 50 L80 36 L94 50 L80 64 Z" stroke="#F20ECF" stroke-width="1.2" fill="none" opacity="0.5"/>
+        </svg>
+        <span class="notfound__code">404</span>
+      </div>
+
+      <h1>Page not found.</h1>
+      <p>The page you're looking for doesn't exist or may have moved. Let's get you back on track.</p>
+
+      <div class="notfound__actions">
+        <ButtonLink href="/">Back to home</ButtonLink>
+        <ButtonLink href="/services" variant="secondary">Explore services</ButtonLink>
+        <ButtonLink href={auditUrl} variant="secondary">Free growth audit</ButtonLink>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    min-height: calc(100svh - 5rem);
+    display: flex;
+    align-items: center;
+  }
+
+  .notfound__inner {
+    display: grid;
+    gap: var(--space-6);
+    justify-items: center;
+    text-align: center;
+    padding-block: var(--space-9);
+  }
+
+  .notfound__visual {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 18rem;
+    height: 10rem;
+  }
+
+  .notfound__visual svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .notfound__code {
+    position: relative;
+    font-family: var(--font-display);
+    font-size: 5rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    background: linear-gradient(100deg, var(--color-violet), var(--color-magenta));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .notfound__inner h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    max-width: 14ch;
+  }
+
+  .notfound__inner > p {
+    max-width: 34rem;
+    color: var(--color-muted);
+    font-size: clamp(1rem, 2vw, 1.1rem);
+  }
+
+  .notfound__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    justify-content: center;
+  }
+</style>

@@ -1,0 +1,59 @@
+---
+import type { FaqItem } from '../data/packages';
+
+interface Props {
+	items: FaqItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="faq-list">
+	{items.map((item) => (
+		<details>
+			<summary>{item.question}<span aria-hidden="true">+</span></summary>
+			<p>{item.answer}</p>
+		</details>
+	))}
+</div>
+
+<style>
+	.faq-list {
+		border-top: var(--border);
+	}
+
+	details {
+		border-bottom: var(--border);
+	}
+
+	summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-4);
+		padding-block: var(--space-5);
+		font-weight: 800;
+		cursor: pointer;
+		list-style: none;
+	}
+
+	summary::-webkit-details-marker {
+		display: none;
+	}
+
+	summary span {
+		color: var(--color-cyan);
+		font-size: 1.5rem;
+		transition: transform 180ms ease;
+	}
+
+	details[open] summary span {
+		transform: rotate(45deg);
+	}
+
+	details p {
+		max-width: 46rem;
+		padding-bottom: var(--space-5);
+		color: var(--color-muted);
+	}
+</style>

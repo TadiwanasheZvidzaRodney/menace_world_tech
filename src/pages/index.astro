@@ -1,0 +1,456 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ButtonLink from '../components/ButtonLink.astro';
+import PackageCard from '../components/PackageCard.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import CampaignShowcase from '../components/visuals/CampaignShowcase.astro';
+import HeroDimension from '../components/visuals/HeroDimension.astro';
+import { capabilityStrip, processSteps } from '../data/site';
+import { featuredServices } from '../data/services';
+import { packageTiers, pricingNote } from '../data/packages';
+import { buildWhatsAppUrl } from '../lib/whatsapp';
+
+const auditUrl = buildWhatsAppUrl();
+const handlingAreas = [
+	{
+		number: 'A',
+		title: 'Strategy',
+		description: 'A practical direction built around the business, audience, offer, and available resources.',
+	},
+	{
+		number: 'B',
+		title: 'Content',
+		description: 'Concepts, copy, graphics, and short-form edits shaped into a consistent content system.',
+	},
+	{
+		number: 'C',
+		title: 'Publishing',
+		description: 'Approved work prepared and published across the channels selected for the plan.',
+	},
+	{
+		number: 'D',
+		title: 'Community',
+		description: 'Thoughtful response support that helps the business stay present around its content.',
+	},
+	{
+		number: 'E',
+		title: 'Reporting',
+		description: 'Clear performance reviews used to guide the next round of practical improvements.',
+	},
+];
+---
+
+<BaseLayout
+	title="Menace World Tech"
+	description="Zimbabwe's growth partner for small business: practical strategy, content, advertising, web, automation, and transparent reporting."
+>
+	<section class="hero">
+		<div class="container hero__grid">
+			<div class="hero__content">
+				<p class="eyebrow">Zimbabwe's growth partner for small business.</p>
+				<h1>Turn your social media into a <span class="gradient-text">customer-generating machine.</span></h1>
+				<p class="hero__support">Practical strategy, consistent execution, and clear reporting designed to help your business build a stronger digital presence—without vague promises or unnecessary complexity.</p>
+				<div class="hero__actions">
+					<ButtonLink href={auditUrl}>Get a free growth audit</ButtonLink>
+					<ButtonLink href="/packages" variant="secondary">Explore packages</ButtonLink>
+				</div>
+				<p class="hero__note"><span aria-hidden="true"></span> Local context. Clear next steps. No guaranteed outcomes.</p>
+			</div>
+			<HeroDimension />
+		</div>
+	</section>
+
+	<section class="capabilities" aria-label="Capabilities">
+		<div class="container">
+			<p>Built for the full growth loop</p>
+			<ul>
+				{capabilityStrip.map((capability) => <li>{capability}</li>)}
+			</ul>
+		</div>
+	</section>
+
+	<section class="section" id="services">
+		<div class="container">
+			<SectionHeading
+				eyebrow="Connected capabilities"
+				title="Everything your digital presence needs to move with purpose."
+				description="Choose focused support or connect services into one practical system. Every direction starts with what makes sense for your business."
+			/>
+			<div class="services-grid">
+				{featuredServices.map((service, index) => <ServiceCard service={service} index={index} />)}
+			</div>
+			<div class="section-link"><ButtonLink href="/services" variant="secondary">Explore all eight services</ButtonLink></div>
+		</div>
+	</section>
+
+	<section class="section section--raised" id="how-we-work">
+		<div class="container handling">
+			<div class="handling__intro">
+				<p class="eyebrow">One connected workflow</p>
+				<h2>We handle everything.</h2>
+				<p>From the thinking behind the work to the learning after it launches, each part stays connected to an agreed direction.</p>
+			</div>
+			<ol class="handling__grid">
+				{handlingAreas.map((area, index) => (
+					<li class:list={{ 'handling__item--wide': index === 0 || index === 4 }}>
+						<span>{area.number}</span>
+						<h3>{area.title}</h3>
+						<p>{area.description}</p>
+					</li>
+				))}
+			</ol>
+		</div>
+	</section>
+
+	<section class="section" id="process">
+		<div class="container">
+			<SectionHeading
+				eyebrow="A practical growth loop"
+				title="Audit. Build. Launch. Optimize."
+				description="A clear process keeps the work focused while leaving room to learn and improve."
+			/>
+			<ProcessSteps steps={processSteps} />
+		</div>
+	</section>
+
+	<section class="section packages" id="packages">
+		<div class="container">
+			<SectionHeading
+				eyebrow="Flexible starting points"
+				title="Start where you are. Scale with purpose."
+				description="Four management-fee ranges make it easier to frame the conversation before an exact scope is agreed."
+			/>
+			<div class="packages__note">
+				<strong>Management fee ≠ ad spend.</strong>
+				<p>{pricingNote}</p>
+			</div>
+			<div class="packages__grid">
+				{packageTiers.map((packageTier, index) => <PackageCard packageTier={packageTier} featured={index === 2} />)}
+			</div>
+		</div>
+	</section>
+
+	<section class="section section--raised concept" id="concept-creative">
+		<div class="container concept__grid">
+			<div class="concept__content">
+				<p class="eyebrow">Concept creative / not client work</p>
+				<h2>Ideas built to stop the scroll—and support the strategy.</h2>
+				<p>This original Menace World Tech study shows how a focused message can become a dimensional campaign system. It is illustrative creative, not a client result or performance claim.</p>
+				<ButtonLink href="/services#content-creation" variant="text">Explore content creation</ButtonLink>
+			</div>
+			<CampaignShowcase />
+		</div>
+	</section>
+
+	<section class="section final-cta">
+		<div class="container final-cta__inner">
+			<p class="eyebrow">Your next dimension starts with clarity</p>
+			<h2>Let’s find the practical growth opportunities already in front of your business.</h2>
+			<p>Start with a free growth audit and a straightforward conversation about what could make sense next.</p>
+			<ButtonLink href={auditUrl}>Get a free growth audit</ButtonLink>
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.hero {
+		position: relative;
+		padding-block: clamp(var(--space-7), 8vw, var(--space-9));
+	}
+
+	.hero::before {
+		position: absolute;
+		top: 8%;
+		left: -12rem;
+		width: 25rem;
+		height: 25rem;
+		border: 1px solid rgb(124 33 245 / 15%);
+		transform: rotate(38deg);
+		content: '';
+	}
+
+	.hero__grid {
+		position: relative;
+		display: grid;
+		align-items: center;
+		gap: clamp(var(--space-7), 7vw, var(--space-9));
+	}
+
+	.hero__content {
+		display: grid;
+		justify-items: start;
+		gap: var(--space-5);
+	}
+
+	.hero h1 {
+		max-width: 14ch;
+	}
+
+	.hero__support {
+		max-width: 39rem;
+		color: var(--color-muted);
+		font-size: clamp(1rem, 2vw, 1.17rem);
+	}
+
+	.hero__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+	}
+
+	.hero__note {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		color: var(--color-muted);
+		font-size: 0.76rem;
+	}
+
+	.hero__note span {
+		width: 0.45rem;
+		height: 0.45rem;
+		background: var(--color-cyan);
+		box-shadow: 0 0 0.7rem var(--color-cyan);
+	}
+
+	.capabilities {
+		border-block: var(--border);
+		background: rgb(11 7 18 / 72%);
+	}
+
+	.capabilities .container {
+		display: grid;
+		gap: var(--space-4);
+		padding-block: var(--space-4);
+	}
+
+	.capabilities p {
+		color: var(--color-muted);
+		font-size: 0.65rem;
+		font-weight: 800;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+	}
+
+	.capabilities ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2) var(--space-5);
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+
+	.capabilities li {
+		position: relative;
+		padding-left: var(--space-3);
+		font-size: 0.8rem;
+		font-weight: 800;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+	}
+
+	.capabilities li::before {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		width: 0.25rem;
+		height: 0.25rem;
+		transform: translateY(-50%) rotate(45deg);
+		background: var(--color-magenta);
+		content: '';
+	}
+
+	.services-grid {
+		display: grid;
+		gap: var(--space-4);
+	}
+
+	.section-link {
+		margin-top: var(--space-6);
+	}
+
+	.handling {
+		display: grid;
+		gap: var(--space-7);
+	}
+
+	.handling__intro {
+		display: grid;
+		align-content: start;
+		gap: var(--space-4);
+	}
+
+	.handling__intro > p:last-child {
+		max-width: 34rem;
+		color: var(--color-muted);
+	}
+
+	.handling__grid {
+		display: grid;
+		gap: var(--space-3);
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+
+	.handling__grid li {
+		display: grid;
+		align-content: start;
+		gap: var(--space-3);
+		padding: var(--space-5);
+		border: var(--border);
+		border-radius: var(--radius-sm);
+		background: rgb(5 3 10 / 56%);
+	}
+
+	.handling__grid li > span {
+		color: var(--color-magenta);
+		font-family: var(--font-display);
+		font-size: 0.7rem;
+	}
+
+	.handling__grid li p {
+		color: var(--color-muted);
+		font-size: 0.9rem;
+	}
+
+	.packages {
+		position: relative;
+	}
+
+	.packages__note {
+		display: grid;
+		gap: var(--space-2);
+		padding: var(--space-4) var(--space-5);
+		margin-bottom: var(--space-5);
+		border-left: 3px solid var(--color-cyan);
+		background: rgb(18 221 243 / 6%);
+	}
+
+	.packages__note p {
+		color: var(--color-muted);
+		font-size: 0.88rem;
+	}
+
+	.packages__grid {
+		display: grid;
+		gap: var(--space-4);
+	}
+
+	.concept__grid {
+		display: grid;
+		align-items: center;
+		gap: clamp(var(--space-7), 7vw, var(--space-9));
+	}
+
+	.concept__content {
+		display: grid;
+		justify-items: start;
+		gap: var(--space-5);
+	}
+
+	.concept__content > p:not(.eyebrow) {
+		color: var(--color-muted);
+	}
+
+	.final-cta__inner {
+		position: relative;
+		display: grid;
+		justify-items: center;
+		gap: var(--space-5);
+		padding: clamp(var(--space-6), 7vw, var(--space-9));
+		border: 1px solid rgb(242 14 207 / 34%);
+		border-radius: var(--radius-angular);
+		background:
+			linear-gradient(120deg, rgb(124 33 245 / 14%), transparent 45%, rgb(18 221 243 / 8%)),
+			var(--color-raised);
+		box-shadow: var(--glow-violet);
+		text-align: center;
+		overflow: hidden;
+	}
+
+	.final-cta__inner::after {
+		position: absolute;
+		right: -4rem;
+		bottom: -7rem;
+		width: 14rem;
+		height: 14rem;
+		border: 2rem solid rgb(242 14 207 / 8%);
+		transform: rotate(28deg);
+		content: '';
+	}
+
+	.final-cta h2,
+	.final-cta p:not(.eyebrow),
+	.final-cta :global(.button) {
+		position: relative;
+		z-index: 1;
+	}
+
+	.final-cta h2 {
+		max-width: 21ch;
+	}
+
+	.final-cta p:not(.eyebrow) {
+		max-width: 42rem;
+		color: var(--color-muted);
+	}
+
+	@media (min-width: 40rem) {
+		.services-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		.handling__grid,
+		.packages__grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 50rem) {
+		.capabilities .container {
+			grid-template-columns: auto 1fr;
+			align-items: center;
+		}
+
+		.capabilities ul {
+			justify-content: flex-end;
+		}
+
+		.handling {
+			grid-template-columns: 0.75fr 1.25fr;
+		}
+
+		.handling__item--wide {
+			grid-column: span 2;
+		}
+	}
+
+	@media (min-width: 64rem) {
+		.hero__grid {
+			grid-template-columns: minmax(0, 1.05fr) minmax(25rem, 0.95fr);
+		}
+
+		.services-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+
+		.packages__grid {
+			grid-template-columns: repeat(4, 1fr);
+		}
+
+		.concept__grid {
+			grid-template-columns: 0.72fr 1.28fr;
+		}
+	}
+
+	@media (max-width: 30rem) {
+		.hero__actions,
+		.hero__actions :global(.button) {
+			width: 100%;
+		}
+	}
+</style>

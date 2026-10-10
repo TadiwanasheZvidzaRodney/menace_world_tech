@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Menace World Tech mark</title>
+  <desc id="desc">An angular letter M crossed by an upward arrow.</desc>
+  <defs>
+    <linearGradient id="mark-gradient" x1="24" y1="136" x2="136" y2="24" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C21F5"/>
+      <stop offset=".52" stop-color="#F20ECF"/>
+      <stop offset="1" stop-color="#12DDF3"/>
+    </linearGradient>
+  </defs>
+  <path d="M18 128V40h22l40 44 40-44h22v88h-25V78L80 118 43 78v50H18Z" fill="url(#mark-gradient)"/>
+  <path d="m111 16 32 32h-19v31h-24V48H81l30-32Z" fill="#F7F5FF"/>
+</svg>
