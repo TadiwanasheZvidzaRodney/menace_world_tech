@@ -99,6 +99,8 @@ const structuredData = {
 
 		<!-- Structured data -->
 		<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+		<!-- Additional head content (e.g. Article JSON-LD from blog post pages) -->
+		<slot name="head" />
 	</head>
 	<body>
 		<a class="skip-link" href="#main-content">Skip to content</a>

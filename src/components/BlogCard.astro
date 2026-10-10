@@ -1,0 +1,166 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  index?: number;
+}
+
+const { post, index = 0 } = Astro.props;
+const { title, description, publishedAt, category } = post.data;
+const slug = post.id;
+
+const formattedDate = publishedAt.toLocaleDateString('en-ZW', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+
+const categoryColors: Record<string, string> = {
+  Strategy: 'var(--color-violet)',
+  Content: 'var(--color-magenta)',
+  Advertising: 'var(--color-cyan)',
+  Web: '#22d3ee',
+  Automation: '#a78bfa',
+  General: 'var(--color-muted)',
+};
+
+const categoryColor = categoryColors[category] ?? 'var(--color-muted)';
+---
+
+<article
+  class="blog-card reveal"
+  data-category={category}
+  style={`--delay: ${index * 80}ms`}
+>
+  <div class="blog-card__glow" aria-hidden="true"></div>
+  <div class="blog-card__meta">
+    <span class="blog-card__category" style={`color: ${categoryColor}`}>{category}</span>
+    <time datetime={publishedAt.toISOString()} class="blog-card__date">{formattedDate}</time>
+  </div>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <a href={`/blog/${slug}`} class="blog-card__link">
+    Read article <span class="sr-only">: {title}</span>
+  </a>
+</article>
+
+<style>
+  .blog-card {
+    position: relative;
+    display: grid;
+    min-height: 19rem;
+    align-content: start;
+    gap: var(--space-4);
+    padding: clamp(var(--space-5), 4vw, var(--space-6));
+    border: var(--border-glass);
+    border-radius: var(--radius-md);
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    box-shadow: var(--glass-shadow);
+    overflow: hidden;
+    transition:
+      transform var(--duration-base) var(--ease-spring),
+      box-shadow var(--duration-base) var(--ease-spring),
+      border-color var(--duration-base) var(--ease-spring),
+      background var(--duration-base) var(--ease-spring);
+    outline: 1px solid rgb(124 33 245 / 18%);
+    outline-offset: -1px;
+  }
+
+  /* Fallback for browsers without backdrop-filter */
+  @supports not (backdrop-filter: blur(1px)) {
+    .blog-card {
+      background: rgb(16 10 28 / 94%);
+    }
+  }
+
+  .blog-card__glow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      60% 60% at var(--gx, 50%) var(--gy, 80%),
+      rgb(124 33 245 / 12%) 0%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity var(--duration-base) var(--ease-out);
+    pointer-events: none;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-6px);
+    background: var(--glass-bg-hover);
+    box-shadow: var(--glass-shadow-hover), var(--glow-violet);
+    border-color: rgb(124 33 245 / 35%);
+    outline-color: rgb(18 221 243 / 25%);
+  }
+
+  .blog-card:hover .blog-card__glow {
+    opacity: 1;
+  }
+
+  .blog-card__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .blog-card__category {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .blog-card__date {
+    color: var(--color-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+
+  .blog-card h3 {
+    color: var(--color-text);
+  }
+
+  .blog-card p {
+    color: var(--color-muted);
+  }
+
+  .blog-card__link {
+    position: relative;
+    z-index: 1;
+    align-self: end;
+    margin-top: auto;
+    color: var(--color-text);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-decoration-color: var(--color-magenta);
+    text-transform: uppercase;
+    transition:
+      color var(--duration-fast) ease,
+      text-decoration-color var(--duration-fast) ease;
+  }
+
+  .blog-card:hover .blog-card__link {
+    color: var(--color-cyan);
+    text-decoration-color: var(--color-cyan);
+  }
+</style>
+
+<script>
+  // Cursor-tracked glow
+  document.querySelectorAll<HTMLElement>('.blog-card').forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--gx', `${x}%`);
+      card.style.setProperty('--gy', `${y}%`);
+    });
+  });
+</script>

@@ -14,6 +14,7 @@ export const navigation: NavigationItem[] = [
 	{ label: 'Services', href: '/services' },
 	{ label: 'Packages', href: '/packages' },
 	{ label: 'About', href: '/about' },
+	{ label: 'Blog', href: '/blog' },
 	{ label: 'Contact', href: '/contact' },
 ];
 

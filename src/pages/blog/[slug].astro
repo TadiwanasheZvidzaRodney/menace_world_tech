@@ -1,0 +1,380 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ButtonLink from '../../components/ButtonLink.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { SITE_NAME } from '../../data/site';
+import { buildWhatsAppUrl } from '../../lib/whatsapp';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+// Estimate read time — post.body may be undefined in new content layer API
+const wordCount = (post.body ?? '').split(/\s+/).filter(Boolean).length;
+const readTime = Math.ceil(wordCount / 200) || 1;
+
+// Related posts — 2 most-recent excluding current
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const morePosts = allPosts
+  .filter((p) => p.id !== post.id)
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+  .slice(0, 2);
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://menaceworldtech.vercel.app';
+const canonicalUrl = `${siteUrl}/blog/${post.id}`;
+const publishedIso = post.data.publishedAt.toISOString();
+const updatedIso = (post.data.updatedAt ?? post.data.publishedAt).toISOString();
+const publishedDisplay = post.data.publishedAt.toLocaleDateString('en-ZW', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const categoryColors: Record<string, string> = {
+  Strategy: 'var(--color-violet)',
+  Content: 'var(--color-magenta)',
+  Advertising: 'var(--color-cyan)',
+  Web: '#22d3ee',
+  Automation: '#a78bfa',
+  General: 'var(--color-muted)',
+};
+const categoryColor = categoryColors[post.data.category] ?? 'var(--color-muted)';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.description,
+  image: `${siteUrl}${post.data.image}`,
+  datePublished: publishedIso,
+  dateModified: updatedIso,
+  author: {
+    '@type': 'Organization',
+    name: post.data.author,
+    url: siteUrl,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: SITE_NAME,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/logo.webp` },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
+};
+
+const auditUrl = buildWhatsAppUrl();
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.image}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)}></script>
+  </Fragment>
+
+  <!-- ── Back link ── -->
+  <div class="post-back container">
+    <a href="/blog" class="back-link">← Back to Blog</a>
+  </div>
+
+  <!-- ── Post hero ── -->
+  <section class="post-hero">
+    <div class="container">
+      <span class="eyebrow post-hero__category" style={`color: ${categoryColor}`}>{post.data.category}</span>
+      <h1>{post.data.title}</h1>
+      <p class="post-hero__desc">{post.data.description}</p>
+      <div class="post-meta">
+        <span>{post.data.author}</span>
+        <span aria-hidden="true">·</span>
+        <time datetime={publishedIso}>{publishedDisplay}</time>
+        <span aria-hidden="true">·</span>
+        <span>{readTime} min read</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Post layout ── -->
+  <div class="post-layout container">
+    <!-- Main article body -->
+    <article class="post-prose">
+      <Content />
+    </article>
+
+    <!-- Sidebar -->
+    {morePosts.length > 0 && (
+      <aside class="post-sidebar">
+        <p class="sidebar-heading">More articles</p>
+        {morePosts.map((p, i) => (
+          <BlogCard post={p} index={i} />
+        ))}
+      </aside>
+    )}
+  </div>
+
+  <!-- ── Final CTA ── -->
+  <section class="section final-cta">
+    <div class="container final-cta__inner">
+      <p class="eyebrow">Your next dimension starts with clarity</p>
+      <h2>Let's find the practical growth opportunities already in front of your business.</h2>
+      <p>Start with a free growth audit and a straightforward conversation about what could make sense next.</p>
+      <ButtonLink href={auditUrl}>Get a free growth audit</ButtonLink>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ══════════════════════════════════════════
+     BACK LINK
+  ══════════════════════════════════════════ */
+  .post-back {
+    padding-block: var(--space-5) 0;
+  }
+
+  .back-link {
+    color: var(--color-muted);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color var(--duration-fast) ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-cyan);
+  }
+
+  /* ══════════════════════════════════════════
+     POST HERO
+  ══════════════════════════════════════════ */
+  .post-hero {
+    position: relative;
+    padding-block: clamp(var(--space-6), 8vw, var(--space-9));
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .post-hero .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .post-hero__category {
+    display: inline-block;
+    margin-bottom: var(--space-2);
+  }
+
+  .post-hero h1 {
+    max-width: 22ch;
+    margin-inline: auto;
+  }
+
+  .post-hero__desc {
+    max-width: 44rem;
+    color: var(--color-muted);
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    line-height: 1.75;
+  }
+
+  .post-meta {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-3);
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  /* ══════════════════════════════════════════
+     POST LAYOUT
+  ══════════════════════════════════════════ */
+  .post-layout {
+    display: grid;
+    gap: var(--space-7);
+    padding-block: var(--space-8) var(--space-10);
+    align-items: start;
+  }
+
+  /* ══════════════════════════════════════════
+     PROSE STYLES
+  ══════════════════════════════════════════ */
+  .post-prose {
+    max-width: 70ch;
+    width: 100%;
+  }
+
+  .post-prose :global(h2),
+  .post-prose :global(h3),
+  .post-prose :global(h4) {
+    font-family: var(--font-display);
+    margin-block: var(--space-6) var(--space-3);
+    color: var(--color-text);
+  }
+
+  .post-prose :global(h2) {
+    background: linear-gradient(100deg, var(--color-text) 12%, var(--color-cyan) 48%, var(--color-magenta) 86%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+  }
+
+  .post-prose :global(h3) {
+    color: var(--color-text);
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+  }
+
+  .post-prose :global(p) {
+    color: var(--color-muted);
+    line-height: 1.85;
+    margin-block: var(--space-4) 0;
+    font-size: 1.0125rem;
+  }
+
+  .post-prose :global(a) {
+    color: var(--color-cyan);
+    text-underline-offset: 0.25em;
+  }
+
+  .post-prose :global(ul),
+  .post-prose :global(ol) {
+    color: var(--color-muted);
+    padding-left: var(--space-5);
+    line-height: 1.85;
+    margin-block: var(--space-4) 0;
+  }
+
+  .post-prose :global(li) {
+    margin-block: var(--space-2) 0;
+  }
+
+  .post-prose :global(strong) {
+    color: var(--color-text);
+    font-weight: 800;
+  }
+
+  .post-prose :global(blockquote) {
+    border-left: 3px solid var(--color-cyan);
+    padding-left: var(--space-4);
+    margin: var(--space-6) 0;
+    color: var(--color-muted);
+    font-style: italic;
+    background: rgb(18 221 243 / 4%);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding-block: var(--space-3);
+  }
+
+  .post-prose :global(hr) {
+    border: none;
+    border-top: var(--border-glass);
+    margin-block: var(--space-7);
+  }
+
+  .post-prose :global(code) {
+    background: rgb(124 33 245 / 12%);
+    padding: 0.15em 0.45em;
+    border-radius: var(--radius-sm);
+    font-size: 0.88em;
+    color: var(--color-cyan);
+  }
+
+  /* ══════════════════════════════════════════
+     SIDEBAR
+  ══════════════════════════════════════════ */
+  .post-sidebar {
+    display: grid;
+    align-content: start;
+    gap: var(--space-5);
+  }
+
+  .sidebar-heading {
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    padding-bottom: var(--space-3);
+    border-bottom: var(--border-glass);
+    margin: 0;
+  }
+
+  /* ══════════════════════════════════════════
+     FINAL CTA
+  ══════════════════════════════════════════ */
+  .final-cta__inner {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: var(--space-5);
+    padding: clamp(var(--space-6), 7vw, var(--space-9));
+    border: 1px solid rgb(242 14 207 / 30%);
+    border-radius: var(--radius-md);
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur-heavy);
+    backdrop-filter: var(--glass-blur-heavy);
+    box-shadow:
+      var(--glass-shadow),
+      0 0 3rem rgb(124 33 245 / 14%),
+      0 0 6rem rgb(242 14 207 / 8%);
+    text-align: center;
+    overflow: hidden;
+    transition: box-shadow var(--duration-slow) var(--ease-out);
+  }
+
+  @supports not (backdrop-filter: blur(1px)) {
+    .final-cta__inner {
+      background: rgb(16 10 28 / 96%);
+    }
+  }
+
+  .final-cta__inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      rgb(124 33 245 / 12%) 0%,
+      transparent 40%,
+      rgb(18 221 243 / 6%) 100%
+    );
+    pointer-events: none;
+  }
+
+  .final-cta h2 {
+    max-width: 21ch;
+  }
+
+  .final-cta p:not(.eyebrow) {
+    max-width: 42rem;
+    color: var(--color-muted);
+  }
+
+  .final-cta h2,
+  .final-cta p:not(.eyebrow),
+  .final-cta :global(.button) {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ══════════════════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════════════════ */
+  @media (min-width: 72rem) {
+    .post-layout {
+      grid-template-columns: 1fr 22rem;
+    }
+  }
+</style>
