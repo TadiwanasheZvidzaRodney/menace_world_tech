@@ -21,7 +21,7 @@ const {
 	noindex = false,
 } = Astro.props;
 
-const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://menaceworldtech.com';
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://menaceworldtech.vercel.app';
 const pageTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
 const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
 const socialImageUrl = `${siteUrl}${image}`;
@@ -46,7 +46,10 @@ const structuredData = {
 		addressCountry: 'ZW',
 	},
 	serviceType: services.map((s) => s.title),
-	sameAs: [],
+	sameAs: [
+		'https://www.facebook.com/MenaceWorldTech/',
+		'https://www.tiktok.com/@menaceworldtech',
+	],
 	potentialAction: {
 		'@type': 'ContactPage',
 		url: `${siteUrl}/contact`,

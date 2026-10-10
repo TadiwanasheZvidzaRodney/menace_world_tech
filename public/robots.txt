@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://menaceworldtech.com/sitemap-index.xml
+Sitemap: https://menaceworldtech.vercel.app/sitemap-index.xml
