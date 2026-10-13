@@ -5,7 +5,7 @@ publishedAt: 2025-06-08
 author: "Menace World Tech"
 category: Content
 tags: ["copywriting", "captions", "content", "social media"]
-image: "/brand/social-card.svg"
+image: "/brand/social-card.png"
 draft: false
 ---
 

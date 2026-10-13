@@ -5,7 +5,7 @@ publishedAt: 2025-06-15
 author: "Menace World Tech"
 category: Advertising
 tags: ["advertising", "ad spend", "management fee", "facebook ads"]
-image: "/brand/social-card.svg"
+image: "/brand/social-card.png"
 draft: false
 ---
 

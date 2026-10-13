@@ -5,7 +5,7 @@ publishedAt: 2025-06-01
 author: "Menace World Tech"
 category: Strategy
 tags: ["facebook", "zimbabwe", "social media", "strategy"]
-image: "/brand/social-card.svg"
+image: "/brand/social-card.png"
 draft: false
 ---
 

@@ -10,7 +10,7 @@ import { services } from '../data/services';
 interface Props {
 	title: string;
 	description?: string;
-	/** Absolute path from /public, e.g. '/brand/social-card.svg' */
+	/** Absolute path from /public, e.g. '/brand/social-card.png' */
 	image?: string;
 	/** Set to false on pages that shouldn't be indexed (e.g. 404) */
 	noindex?: boolean;
@@ -19,7 +19,7 @@ interface Props {
 const {
 	title,
 	description = siteMetadata.description,
-	image = '/brand/social-card.svg',
+	image = '/brand/social-card.png',
 	noindex = false,
 } = Astro.props;
 
@@ -89,6 +89,7 @@ const structuredData = {
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:locale" content={siteMetadata.locale} />
 		<meta property="og:image" content={socialImageUrl} />
+		<meta property="og:image:type" content="image/png" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
 		<meta property="og:image:alt" content={`${SITE_NAME} — ${SITE_TAGLINE}`} />

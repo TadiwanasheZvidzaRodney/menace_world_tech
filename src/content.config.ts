@@ -12,7 +12,7 @@ const blog = defineCollection({
     author: z.string().default('Menace World Tech'),
     category: z.enum(['Strategy', 'Content', 'Advertising', 'Web', 'Automation', 'General']),
     tags: z.array(z.string()).optional(),
-    image: z.string().optional().default('/brand/social-card.svg'),
+    image: z.string().optional().default('/brand/social-card.png'),
     draft: z.boolean().default(false),
   }),
 });
