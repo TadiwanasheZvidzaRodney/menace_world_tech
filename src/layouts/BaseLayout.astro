@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import SpeedInsights from '@vercel/speed-insights/astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import { PHONE_E164, SITE_NAME, SITE_TAGLINE, siteMetadata } from '../data/site';
@@ -101,6 +102,7 @@ const structuredData = {
 		<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
 		<!-- Additional head content (e.g. Article JSON-LD from blog post pages) -->
 		<slot name="head" />
+		<SpeedInsights />
 	</head>
 	<body>
 		<a class="skip-link" href="#main-content">Skip to content</a>
