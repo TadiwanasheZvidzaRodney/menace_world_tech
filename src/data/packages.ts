@@ -7,10 +7,10 @@ export interface PackageTier {
 }
 
 export const packageTiers: PackageTier[] = [
-	{ id: 'starter-presence', name: 'Starter Presence', label: 'Get Visible', managementFee: '$60–$150/mo', adBudget: '$20–$50/mo' },
-	{ id: 'growth-engagement', name: 'Growth Engagement', label: 'Get Customers', managementFee: '$120–$300/mo', adBudget: '$50–$150/mo' },
-	{ id: 'business-boost', name: 'Business Boost', label: 'Make Sales', managementFee: '$250–$500/mo', adBudget: '$100–$300/mo' },
-	{ id: 'premium', name: 'Premium', label: 'Full Command', managementFee: '$400–$600/mo', adBudget: '$200+/mo' },
+	{ id: 'starter-presence', name: 'Starter Presence', label: 'Build Visibility', managementFee: '$60–$150/mo', adBudget: '$20–$50/mo' },
+	{ id: 'growth-engagement', name: 'Growth Engagement', label: 'Invite Enquiries', managementFee: '$120–$300/mo', adBudget: '$50–$150/mo' },
+	{ id: 'business-boost', name: 'Business Boost', label: 'Support Sales', managementFee: '$250–$500/mo', adBudget: '$100–$300/mo' },
+	{ id: 'premium', name: 'Premium', label: 'Connected Growth', managementFee: '$400–$600/mo', adBudget: '$200+/mo' },
 ];
 
 export interface AddOn {
@@ -35,7 +35,7 @@ export interface FaqItem {
 export const packageFaqs: FaqItem[] = [
 	{
 		question: 'What is the difference between the management fee and ad spend?',
-		answer: 'The management fee covers the agreed service work. Ad spend is an additional, agreed budget used by the advertising platform and kept transparent.',
+		answer: 'The management fee pays for the agreed work. Your ad spend is a separate budget paid to the advertising platform from an account you control. We agree both amounts upfront and report on campaign activity clearly.',
 	},
 	{
 		question: 'How do onboarding and payment work?',
@@ -51,12 +51,12 @@ export const packageFaqs: FaqItem[] = [
 	},
 	{
 		question: 'Who owns the accounts?',
-		answer: 'Business-owned accounts are preferred where the selected platform supports them, with access arrangements agreed before execution.',
+		answer: 'Your business keeps control of its pages and advertising accounts. We agree the access needed to manage the work before anything launches.',
 	},
 	{
-		question: 'Are results guaranteed?',
-		answer: 'No. Outcomes vary by offer, market, budget, timing, and execution. The focus is practical strategy, ongoing optimization, and transparent reporting.',
+		question: 'How will we know if the work is helping?',
+		answer: 'We agree on what matters to your business, review the available data together, and talk about what to improve. You will always know what we are working on and why.',
 	},
 ];
 
-export const pricingNote = 'All prices are USD management-fee ranges. Ad spend is additional, agreed, and transparent.';
+export const pricingNote = 'All prices are USD management-fee ranges. Your separate ad budget stays under your control and is paid to the advertising platform.';

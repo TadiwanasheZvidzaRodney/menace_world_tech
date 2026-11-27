@@ -16,34 +16,55 @@ const handlingAreas = [
 	{
 		number: 'A',
 		title: 'Strategy',
-		description: 'A practical direction built around the business, audience, offer, and available resources.',
+		description: 'A clear plan shaped around your customers, offer, and available resources.',
 	},
 	{
 		number: 'B',
 		title: 'Content',
-		description: 'Concepts, copy, graphics, and short-form edits shaped into a consistent content system.',
+		description: 'Useful ideas and creative that earn attention and make the next step clear.',
 	},
 	{
 		number: 'C',
 		title: 'Publishing',
-		description: 'Approved work prepared and published across the channels selected for the plan.',
+		description: 'Approved work published where your customers are most likely to see it.',
 	},
 	{
 		number: 'D',
 		title: 'Community',
-		description: 'Thoughtful response support that helps the business stay present around its content.',
+		description: 'Prompt, thoughtful support so warm enquiries are not left waiting.',
 	},
 	{
 		number: 'E',
 		title: 'Reporting',
-		description: 'Clear performance reviews used to guide the next round of practical improvements.',
+		description: 'Clear reports that show what happened and what we can improve next.',
+	},
+];
+
+const socialExamples = [
+	{
+		format: 'Pain → Agitate → Why',
+		title: 'A boost is not a growth plan.',
+		copy: 'Have you boosted a post, watched the likes come in, and wondered where the customers are? More people seeing a post is only a start. They also need a reason to choose you and an easy way to get in touch. We believe your posts, ads, and website should work together to make that happen. Start with a clear offer, a helpful message, and a plan for following up.',
+		cta: 'What happens after someone sees your post?',
+	},
+	{
+		format: 'Outcome → Illustrative scenario',
+		title: 'Be there for customers, even after hours.',
+		copy: 'Imagine someone finds your business at 10:30 pm. Your website answers their first questions, and a chatbot takes their details while you are offline. The next morning, you can pick up the conversation instead of finding a missed message buried in your inbox. A helpful website and chatbot can work together to make it easier for customers to reach you. This is an example of how the system can work, not a client case study.',
+		cta: 'Where do your online enquiries go after hours?',
+	},
+	{
+		format: 'Trust → Transparency',
+		title: 'Your ad budget and our fee are different things.',
+		copy: 'Your management fee pays for the work we do, from planning and creative to managing campaigns and reporting. Your ad budget goes to the advertising platform through an account you control. We agree on both amounts with you upfront and explain where the money goes. You should always know what you are paying for.',
+		cta: 'Ask us to walk you through a clear starting budget.',
 	},
 ];
 ---
 
 <BaseLayout
 	title="Menace World Tech"
-	description="Zimbabwe's digital growth partner for small businesses. Social media management, paid advertising, web design, and content creation in Zimbabwe. Get a free growth audit today."
+	description="Good Zimbabwean businesses deserve clear digital systems that help turn visibility into enquiries. Connect strategy, content, paid media, websites, and automation with transparent fees."
 >
 	<!-- ── Hero ── -->
 	<section class="hero">
@@ -90,14 +111,18 @@ const handlingAreas = [
 
 		<div class="container">
 			<div class="hero__content">
-				<p class="eyebrow">Zimbabwe's growth partner for small business.</p>
-				<h1>Turn your social media into a <span class="gradient-text">customer-generating machine.</span></h1>
-				<p class="hero__support">Practical strategy, consistent execution, and clear reporting designed to help your business build a stronger digital presence—without vague promises or unnecessary complexity.</p>
+				<p class="eyebrow">Good local businesses deserve to be seen.</p>
+				<h1>Good local businesses deserve <span class="gradient-text">a fair chance to grow.</span></h1>
+				<p class="hero__support">Getting likes but not enquiries? Worried that WhatsApp messages are going unanswered? We bring your content, ads, website, and follow-up together to help more customers reach you.</p>
 				<div class="hero__actions">
 					<ButtonLink href={auditUrl}>Get a free growth audit</ButtonLink>
-					<ButtonLink href="/packages" variant="secondary">Explore packages</ButtonLink>
+					<ButtonLink href="#services" variant="secondary">See how the system works</ButtonLink>
 				</div>
-				<p class="hero__note"><span aria-hidden="true"></span> Local context. Clear next steps. No guaranteed outcomes.</p>
+				<ul class="hero__trust" aria-label="What you can expect">
+					<li>Zimbabwe-first strategy</li>
+					<li>Clear fees. Separate ad spend.</li>
+					<li>Plain-English reporting</li>
+				</ul>
 			</div>
 		</div>
 	</section>
@@ -112,18 +137,48 @@ const handlingAreas = [
 		</div>
 	</section>
 
+	<section class="section manifesto reveal-section" aria-labelledby="manifesto-title">
+		<div class="container manifesto__inner">
+			<p class="eyebrow">Why we exist</p>
+			<h2 id="manifesto-title">Ambitious local businesses deserve a fair chance to compete.</h2>
+			<p>Good Zimbabwean businesses deserve the chance to grow, even without a full-time marketing and tech team. We bring your strategy, website, ads, content, and customer enquiries together, with separate, client-controlled ad spend and reporting you can understand. Whether you need social media support, an AI chatbot, brand design, or cloud services, our job is to help your business earn trust and make it easier for customers to reach you.</p>
+		</div>
+	</section>
+
 	<!-- ── Services ── -->
 	<section class="section reveal-section" id="services">
 		<div class="container">
 			<SectionHeading
-				eyebrow="Connected capabilities"
-				title="Everything your digital presence needs to move with purpose."
-				description="Choose focused support or connect services into one practical system. Every direction starts with what makes sense for your business."
+				eyebrow="From attention to enquiry"
+				title="Every service should solve a real business problem."
+				description="Choose the help you need now, or bring everything together into one plan. We'll start by talking about what matters most to your business."
 			/>
 			<div class="services-grid">
 				{featuredServices.map((service, index) => <ServiceCard service={service} index={index} />)}
 			</div>
-			<div class="section-link"><ButtonLink href="/services" variant="secondary">Explore all eight services</ButtonLink></div>
+			<div class="section-link"><ButtonLink href="/services" variant="secondary">See how we solve each challenge</ButtonLink></div>
+		</div>
+	</section>
+
+	<section class="section section--raised social-examples reveal-section" aria-label="Social media copy examples">
+		<div class="container">
+			<SectionHeading
+				eyebrow="Clear words. Useful next steps."
+				title="Marketing should sound like a real conversation."
+				description="Here are three examples of how we talk about the challenges local businesses face."
+				align="center"
+			/>
+			<div class="social-examples__grid">
+				{socialExamples.map((example, index) => (
+					<article class="social-example">
+						<p class="social-example__format">0{index + 1} / {example.format}</p>
+						<h3>{example.title}</h3>
+						<p class="social-example__copy">{example.copy}</p>
+						<p class="social-example__cta">{example.cta}</p>
+					</article>
+				))}
+			</div>
+			<p class="social-examples__note">The after-hours example is illustrative, not a client case study or performance claim.</p>
 		</div>
 	</section>
 
@@ -131,9 +186,9 @@ const handlingAreas = [
 	<section class="section section--raised reveal-section" id="how-we-work">
 		<div class="container handling">
 			<div class="handling__intro">
-				<p class="eyebrow">One connected workflow</p>
-				<h2>We handle everything.</h2>
-				<p>From the thinking behind the work to the learning after it launches, each part stays connected to an agreed direction.</p>
+				<p class="eyebrow">One connected growth loop</p>
+				<h2>Less scattered activity. More clarity at every step.</h2>
+				<p>Your marketing should feel joined up: each decision has a purpose, each channel has a role, and every review helps shape what happens next.</p>
 			</div>
 			<ol class="handling__grid">
 				{handlingAreas.map((area, index) => (
@@ -151,9 +206,9 @@ const handlingAreas = [
 	<section class="section reveal-section" id="process">
 		<div class="container">
 			<SectionHeading
-				eyebrow="A practical growth loop"
-				title="Audit. Build. Launch. Optimize."
-				description="A clear process keeps the work focused while leaving room to learn and improve."
+				eyebrow="A clear path from idea to improvement"
+				title="Understand the gap. Build the system. Learn from the response."
+				description="We agree on a plan together, put it into action, and review what happens so we can make informed decisions about what to do next."
 			/>
 			<ProcessSteps steps={processSteps} />
 		</div>
@@ -163,12 +218,12 @@ const handlingAreas = [
 	<section class="section packages reveal-section" id="packages">
 		<div class="container">
 			<SectionHeading
-				eyebrow="Flexible starting points"
-				title="Start where you are. Scale with purpose."
-				description="Four management-fee ranges make it easier to frame the conversation before an exact scope is agreed."
+				eyebrow="Straightforward monthly fees"
+				title="Know what the work costs and where your ad budget goes."
+				description="Management fees range from $60 to $600 per month. Your ad budget is separate, paid from an account you control, and agreed before any campaign starts."
 			/>
 			<div class="packages__note">
-				<strong>Management fee ≠ ad spend.</strong>
+				<strong>Your management fee is not your ad budget.</strong>
 				<p>{pricingNote}</p>
 			</div>
 			<div class="packages__grid">
@@ -181,9 +236,9 @@ const handlingAreas = [
 	<section class="section section--raised concept reveal-section" id="concept-creative">
 		<div class="container concept__grid">
 			<div class="concept__content">
-				<p class="eyebrow">Concept creative / not client work</p>
-				<h2>Ideas built to stop the scroll—and support the strategy.</h2>
-				<p>This original Menace World Tech study shows how a focused message can become a dimensional campaign system. It is illustrative creative, not a client result or performance claim.</p>
+				<p class="eyebrow">Original concept creative</p>
+				<h2>Creative that catches attention and gives people a reason to act.</h2>
+				<p>This original Menace World Tech study shows how a focused message can become a campaign system. It is illustrative creative, not client work or a performance claim.</p>
 				<ButtonLink href="/services#content-creation" variant="text">Explore content creation</ButtonLink>
 			</div>
 			<CampaignShowcase />
@@ -193,9 +248,9 @@ const handlingAreas = [
 	<!-- ── Final CTA ── -->
 	<section class="section final-cta reveal-section">
 		<div class="container final-cta__inner">
-			<p class="eyebrow">Your next dimension starts with clarity</p>
-			<h2>Let's find the practical growth opportunities already in front of your business.</h2>
-			<p>Start with a free growth audit and a straightforward conversation about what could make sense next.</p>
+			<p class="eyebrow">Start with a clear next step</p>
+			<h2>Find the gaps between being seen and being chosen.</h2>
+			<p>Get a free growth audit: a practical review of your online presence, a few useful improvements, and an honest conversation about what could help next.</p>
 			<ButtonLink href={auditUrl}>Get a free growth audit</ButtonLink>
 		</div>
 	</section>
@@ -288,28 +343,24 @@ const handlingAreas = [
 		gap: var(--space-3);
 	}
 
-	.hero__note {
+	.hero__trust {
 		display: flex;
-		align-items: center;
+		flex-wrap: wrap;
+		justify-content: center;
 		gap: var(--space-2);
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+
+	.hero__trust li {
+		padding: 0.45rem 0.75rem;
+		border: var(--border-glass);
+		border-radius: 999px;
+		background: rgb(247 245 255 / 4%);
 		color: var(--color-muted);
-		font-size: 0.76rem;
-	}
-
-	.hero__note span {
-		display: block;
-		width: 0.4rem;
-		height: 0.4rem;
-		flex-shrink: 0;
-		border-radius: 50%;
-		background: var(--color-cyan);
-		box-shadow: 0 0 0.7rem var(--color-cyan);
-		animation: pulse-dot 2s ease-in-out infinite;
-	}
-
-	@keyframes pulse-dot {
-		0%, 100% { opacity: 1; transform: scale(1); }
-		50%       { opacity: 0.5; transform: scale(0.75); }
+		font-size: 0.74rem;
+		font-weight: 700;
 	}
 
 	/* ══════════════════════════════════════════
@@ -363,6 +414,73 @@ const handlingAreas = [
 		transform: translateY(-50%) rotate(45deg);
 		background: var(--color-magenta);
 		content: '';
+	}
+
+	.manifesto__inner {
+		display: grid;
+		justify-items: start;
+		gap: var(--space-5);
+		max-width: 58rem;
+	}
+
+	.manifesto__inner h2 {
+		max-width: 20ch;
+		font-size: clamp(1.8rem, 4vw, 3rem);
+	}
+
+	.manifesto__inner > p:last-child {
+		max-width: 54rem;
+		color: var(--color-muted);
+		font-size: clamp(1rem, 2vw, 1.12rem);
+		line-height: 1.8;
+	}
+
+	.social-examples__grid {
+		display: grid;
+		gap: var(--space-4);
+		margin-top: var(--space-7);
+	}
+
+	.social-example {
+		display: grid;
+		align-content: start;
+		gap: var(--space-4);
+		padding: clamp(var(--space-5), 4vw, var(--space-6));
+		border: var(--border-glass);
+		border-radius: var(--radius-md);
+		background: var(--glass-bg);
+		box-shadow: var(--glass-shadow);
+	}
+
+	.social-example__format {
+		color: var(--color-cyan);
+		font-size: 0.68rem;
+		font-weight: 800;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.social-example h3 {
+		font-size: clamp(1.2rem, 2vw, 1.45rem);
+	}
+
+	.social-example__copy {
+		color: var(--color-muted);
+		font-size: 0.9rem;
+		line-height: 1.75;
+	}
+
+	.social-example__cta {
+		padding-top: var(--space-3);
+		border-top: var(--border);
+		font-size: 0.84rem;
+		font-weight: 800;
+	}
+
+	.social-examples__note {
+		margin-top: var(--space-4);
+		color: var(--color-muted);
+		font-size: 0.78rem;
 	}
 
 	/* ══════════════════════════════════════════
@@ -569,6 +687,10 @@ const handlingAreas = [
 			grid-template-columns: repeat(2, 1fr);
 		}
 
+		.social-examples__grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
 		.handling__grid,
 		.packages__grid {
 			grid-template-columns: repeat(2, 1fr);
@@ -596,6 +718,10 @@ const handlingAreas = [
 
 	@media (min-width: 64rem) {
 		.services-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+
+		.social-examples__grid {
 			grid-template-columns: repeat(3, 1fr);
 		}
 

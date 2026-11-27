@@ -4,7 +4,7 @@
  *
  * Rebuilds the site then asserts:
  *   - All 6 expected output files exist and are non-empty
- *   - Required copy/pricing strings are present
+ *   - Required brand copy, offer, and pricing strings are present
  *   - WhatsApp number is in every page
  *   - No lorem ipsum, placeholder images, or TODO markers
  */
@@ -75,16 +75,19 @@ for (const [name, html] of Object.entries(pages)) {
 
 // ---------- key copy / pricing ----------
 console.log('\n▸ Required copy & pricing');
-check(pages['index.html'].includes('customer-generating'), 'HOME: "customer-generating"', 'HOME: missing "customer-generating"');
-check(pages['index.html'].includes("Zimbabwe's growth partner"), 'HOME: Zimbabwe eyebrow', 'HOME: missing Zimbabwe eyebrow');
-check(pages['packages/index.html'].includes('Start fast'), 'PACKAGES: "Start fast"', 'PACKAGES: missing "Start fast"');
+check(pages['index.html'].includes('Good local businesses deserve'), 'HOME: why-led hero', 'HOME: missing why-led hero');
+check(pages['index.html'].includes('Good local businesses deserve to be seen'), 'HOME: local business positioning', 'HOME: missing local business positioning');
+check(pages['index.html'].includes('A boost is not a growth plan'), 'HOME: social post examples', 'HOME: missing social post examples');
+check(pages['index.html'].includes('client-controlled ad spend'), 'HOME: transparent ad-spend promise', 'HOME: missing transparent ad-spend promise');
+check(pages['packages/index.html'].includes('where your ad budget goes'), 'PACKAGES: transparent pricing headline', 'PACKAGES: missing transparent pricing headline');
 check(pages['packages/index.html'].includes('$60'), 'PACKAGES: starter price $60', 'PACKAGES: missing starter price');
 check(pages['packages/index.html'].includes('$400'), 'PACKAGES: premium price $400', 'PACKAGES: missing premium price');
 check(pages['packages/index.html'].includes('Ad budget'), 'PACKAGES: "Ad budget" callout', 'PACKAGES: missing ad budget callout');
-check(pages['services/index.html'].includes('Social media marketing'), 'SERVICES: social media section', 'SERVICES: missing social media section');
-check(pages['services/index.html'].includes('Paid advertising'), 'SERVICES: paid advertising section', 'SERVICES: missing paid advertising section');
-check(pages['services/index.html'].includes('Website design'), 'SERVICES: website design section', 'SERVICES: missing website design section');
-check(pages['about/index.html'].includes('small business'), 'ABOUT: SME positioning', 'ABOUT: missing SME positioning');
+check(pages['services/index.html'].includes('Social media marketing'), 'SERVICES: social media service', 'SERVICES: missing social media service');
+check(pages['services/index.html'].includes('Paid advertising'), 'SERVICES: paid advertising service', 'SERVICES: missing paid advertising service');
+check(pages['services/index.html'].includes('Website design'), 'SERVICES: website design service', 'SERVICES: missing website design service');
+check(pages['services/index.html'].includes('Capture useful enquiries when your team is offline'), 'SERVICES: chatbot outcome', 'SERVICES: missing chatbot outcome');
+check(pages['about/index.html'].includes('help local businesses'), 'ABOUT: SME positioning', 'ABOUT: missing SME positioning');
 check(pages['about/index.html'].includes('Clarity over jargon'), 'ABOUT: values', 'ABOUT: missing values');
 check(pages['contact/index.html'].includes('growth audit'), 'CONTACT: growth audit', 'CONTACT: missing growth audit');
 check(pages['404.html'].includes('Page not found'), '404: page title', '404: missing page title');
@@ -97,6 +100,7 @@ check(!allHtml.includes('TODO'), 'No TODO markers', 'FOUND TODO markers in outpu
 check(!allHtml.includes('undefined'), 'No "undefined" strings', 'FOUND "undefined" in output HTML');
 check(!allHtml.includes('picsum.photos'), 'No external placeholder images', 'FOUND picsum.photos placeholder');
 check(!allHtml.includes('placeholder.com'), 'No placeholder.com images', 'FOUND placeholder.com image');
+check(!allHtml.toLowerCase().includes('guarantee'), 'No defensive guarantee language', 'FOUND defensive guarantee language');
 // Catch guarantee language that IS a promise (not "not guaranteed" disclaimers)
 check(!allHtml.match(/(?<!not\s)guarantee[sd]?\s+(specific|exact)?\s*(sales|leads|followers|results)\s*(?!are not)/i), 'No improper guarantee language', 'FOUND improper guarantee language');
 

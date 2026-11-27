@@ -1,5 +1,5 @@
 export const SITE_NAME = 'Menace World Tech';
-export const SITE_TAGLINE = 'Taking your business to another dimension.';
+export const SITE_TAGLINE = 'Connected digital systems. Clearer paths to growth.';
 export const PHONE_DISPLAY = '+263 78 3980 802';
 export const PHONE_E164 = '+263783980802';
 export const WHATSAPP_NUMBER = '263783980802';
@@ -34,10 +34,10 @@ export interface ProcessStep {
 }
 
 export const processSteps: ProcessStep[] = [
-	{ number: '01', title: 'Audit', description: 'Review the current presence, priorities, and practical opportunities.' },
-	{ number: '02', title: 'Build', description: 'Shape the strategy, content, systems, and assets around the agreed direction.' },
-	{ number: '03', title: 'Launch', description: 'Put approved work into market across the channels selected for the business.' },
-	{ number: '04', title: 'Optimize', description: 'Learn from performance, refine the execution, and report with clarity.' },
+	{ number: '01', title: 'Understand', description: 'Review your offer, customer journey, current presence, and priorities.' },
+	{ number: '02', title: 'Plan', description: 'Agree the scope, channels, content, budget, and useful measures.' },
+	{ number: '03', title: 'Put it to work', description: 'Launch approved creative and systems across the channels that fit.' },
+	{ number: '04', title: 'Learn and improve', description: 'Review the response together and decide what to refine next.' },
 ];
 
 export const values = [
@@ -49,6 +49,6 @@ export const values = [
 ] as const;
 
 export const siteMetadata = {
-	description: 'Zimbabwe-based digital growth support for small businesses through strategy, content, advertising, web, automation, and transparent reporting.',
+	description: 'Digital growth support for Zimbabwean businesses, from strategy and content to websites and automation, with clear fees and straightforward reporting.',
 	locale: 'en_ZW',
 } as const;

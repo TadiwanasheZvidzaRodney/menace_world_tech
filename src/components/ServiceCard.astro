@@ -15,9 +15,9 @@ const { service, index = 0 } = Astro.props;
 		<span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
 		<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 25 25 5M13 5h12v12"></path></svg>
 	</div>
-	<h3>{service.title}</h3>
+	<h3>{service.outcome}</h3>
 	<p>{service.description}</p>
-	<a href={`/services#${service.id}`}>Explore service <span class="sr-only">: {service.title}</span></a>
+	<a href={`/services#${service.id}`}>How we help: {service.title}</a>
 </article>
 
 <style>

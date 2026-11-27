@@ -50,7 +50,7 @@ const callUrl = buildCallUrl();
 	</div>
 	<div class="container site-footer__base">
 		<p>© {year} Menace World Tech</p>
-		<p>Strategy. Execution. Optimization.</p>
+		<p>Clear strategy. Connected execution. Transparent reporting.</p>
 	</div>
 </footer>
 
@@ -64,6 +64,10 @@ const callUrl = buildCallUrl();
 	.site-footer__grid {
 		display: grid;
 		gap: var(--space-7);
+	}
+
+	.site-footer__grid > * {
+		min-width: 0;
 	}
 
 	.site-footer__intro,
@@ -115,6 +119,7 @@ const callUrl = buildCallUrl();
 
 	.site-footer__social {
 		display: flex;
+		flex-wrap: wrap;
 		gap: var(--space-3);
 		margin-top: var(--space-2);
 	}
