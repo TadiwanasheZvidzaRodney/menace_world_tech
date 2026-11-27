@@ -61,20 +61,20 @@ const fallbackAction = `https://wa.me/${WHATSAPP_NUMBER}?text=${fallbackMsg}`;
       aria-required="true"
       aria-describedby="cf-phone-hint"
     />
-    <span class="field-hint" id="cf-phone-hint">We'll reply on WhatsApp — using this number.</span>
+    <span class="field-hint" id="cf-phone-hint">We'll reply on WhatsApp using this number.</span>
   </div>
 
   <div class="form-group">
     <label for="cf-service">Service interest</label>
     <select id="cf-service" name="service" autocomplete="off">
-      <option value="">Not sure yet — let's talk</option>
+      <option value="">Not sure yet? Let's talk</option>
       {services.map((s) => (
         <option value={s.id}>{s.title}</option>
       ))}
       <option value="multiple">Multiple services</option>
       <option value="other">Something else</option>
     </select>
-    <span class="field-hint">Optional — helps us prepare for the conversation.</span>
+    <span class="field-hint">Optional. This helps us prepare for our conversation.</span>
   </div>
 
   <div class="form-group">
@@ -86,9 +86,9 @@ const fallbackAction = `https://wa.me/${WHATSAPP_NUMBER}?text=${fallbackMsg}`;
       rows="4"
       aria-required="true"
       aria-describedby="cf-challenge-hint"
-      placeholder="e.g. We post on Facebook but get no enquiries. We want more customers from social media."
+      placeholder="e.g. We get likes on Facebook but few enquiries, or messages arrive after we have closed."
     ></textarea>
-    <span class="field-hint" id="cf-challenge-hint">Required. A few sentences is enough — this shapes the audit.</span>
+    <span class="field-hint" id="cf-challenge-hint">Required. A few sentences will help us understand what you need.</span>
   </div>
 
   <div class="form-row">

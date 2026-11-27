@@ -11,46 +11,54 @@ const auditUrl = buildWhatsAppUrl();
 const valueDetails = [
   {
     title: 'Clarity over jargon',
-    description: 'Strategy and reporting explained in plain language. If something cannot be explained clearly, it probably should not be in the plan.',
+    description: 'We explain our recommendations and reports in a way that makes sense to you, not just to marketers.',
   },
   {
     title: 'Local context',
-    description: 'Understanding the Zimbabwe market, how people use social platforms here, and what drives purchase decisions for local consumers is as important as technical execution.',
+    description: 'We account for the Zimbabwean market, local buying habits, and the practical realities behind each business.',
   },
   {
     title: 'Practical creativity',
-    description: 'Creative work that moves customers and fits within the practical constraints of the business — budget, content availability, and realistic timelines.',
+    description: 'Useful creative should fit the offer, the audience, and the time and budget available to deliver it well.',
   },
   {
     title: 'Transparent execution',
-    description: 'Clear reporting on what was done, what is performing, and what is being adjusted. No hidden ad costs, no vague deliverables, no surprises.',
+    description: 'You can see what work was done, what your ad budget paid for, and what we recommend changing next.',
   },
   {
     title: 'Continuous improvement',
-    description: 'Every month of data is an opportunity to do better. The strategy adapts based on performance, not on assumptions.',
+    description: 'We look at what is working for your business and use what we learn to make the next round better.',
   },
 ];
 
 const teamPoints = [
-  'Zimbabwe-based — local clients, local context, local hours',
-  'Facebook-first awareness that adapts channels to the business and audience',
-  'Management fees and ad spend invoiced separately for full transparency',
-  'Client retains ownership of all pages and accounts',
-  'Strategy, execution, and reporting focus — not vague guarantees',
+  'Zimbabwe-based, with local context built into the work',
+  'Channels chosen for your customers and business goals',
+  'Management fee and ad budget agreed and kept separate',
+  'You retain control of your business pages and advertising accounts',
+  'Clear plans, practical execution, and plain-English reporting',
 ];
 ---
 
 <BaseLayout
   title="About"
-  description="Menace World Tech is a Zimbabwe-based digital marketing agency helping small businesses grow online. Local-first social media strategy, content, advertising, web, and automation — with transparent reporting and no hidden costs."
+  description="We believe ambitious Zimbabwean businesses deserve clear, honest digital systems and a capable growth partner. Learn why Menace World Tech connects strategy, creative, websites, paid media, and automation."
 >
 
   <section class="page-hero section">
     <div class="container">
-      <p class="eyebrow">Who we are</p>
-      <h1>A small business<br /><span class="gradient-text">helping small businesses grow.</span></h1>
-      <p class="page-hero__sub">Menace World Tech is a Zimbabwe-based digital growth partner. Not a social media manager — a partner that handles your full digital presence so you can stay focused on running your business.</p>
+      <p class="eyebrow">A growth partner for Zimbabwean businesses</p>
+      <h1>Good businesses deserve <span class="gradient-text">a fair chance to compete.</span></h1>
+      <p class="page-hero__sub">We're here to help local businesses get noticed, earn trust, and connect with customers, even if they don't have an in-house marketing and tech team.</p>
       <ButtonLink href={auditUrl}>Start a conversation</ButtonLink>
+    </div>
+  </section>
+
+  <section class="section manifesto" id="why-we-exist">
+    <div class="container manifesto__inner">
+      <p class="eyebrow">Why → how → what</p>
+      <h2>Why we exist</h2>
+      <p>Good local businesses deserve the chance to grow, even without a full-time marketing and tech team. We bring your strategy, website, ads, content, and customer enquiries together, with separate, client-controlled ad spend and reporting you can understand. From social media and websites to AI chatbots, brand design, and cloud services, we're here to help your business earn trust and make it easier for customers to reach you.</p>
     </div>
   </section>
 
@@ -59,12 +67,12 @@ const teamPoints = [
       <div class="mission__content">
         <p class="eyebrow">What drives us</p>
         <h2>Mission</h2>
-        <p>Make practical, professionally executed digital growth accessible to Zimbabwean small businesses — without requiring them to understand every platform, algorithm, or ad format themselves.</p>
+        <p>Give Zimbabwean businesses access to connected digital support, honest guidance, and work they can understand and act on.</p>
       </div>
       <div class="mission__content">
         <p class="eyebrow">Where we're headed</p>
         <h2>Vision</h2>
-        <p>Help local businesses build durable digital brands that attract customers, generate leads, and compete confidently in a market that is moving online faster every year.</p>
+        <p>See local businesses compete confidently with clear brands, useful digital systems, and customer journeys that are easier to navigate.</p>
       </div>
     </div>
   </section>
@@ -92,9 +100,9 @@ const teamPoints = [
     <div class="container approach__grid">
       <div class="approach__content">
         <p class="eyebrow">How we work</p>
-        <h2>Local by default.<br />Strategic by design.</h2>
-        <p>Facebook leads reach in Zimbabwe because it captures the most active social time for most demographics. That makes it the default starting point for almost every small business client. But it is not the only answer — Instagram, TikTok, LinkedIn, and WhatsApp all have specific roles depending on the business, the product, and the audience. Channels are selected based on what actually makes sense for the business, not added as a default upsell.</p>
-        <p style="margin-top: var(--space-4); color: var(--color-muted);">The same logic applies to every other decision: budget, content format, posting frequency, ad targeting, and reporting structure. Everything starts with the business reality, not a template.</p>
+        <h2>Built around your customers.<br />Connected to your goals.</h2>
+        <p>Facebook, Instagram, TikTok, LinkedIn, and WhatsApp can all be useful. The right mix depends on your customers, what you offer, and how much demand you can take on. We'll help you choose the right channels and make it easy for interested people to get in touch.</p>
+        <p style="margin-top: var(--space-4); color: var(--color-muted);">The same thinking shapes your budget, content, campaign, and reporting. You will know what we recommend, why it fits, and what we are watching as the work progresses.</p>
       </div>
 
       <div class="approach__points">
@@ -107,7 +115,7 @@ const teamPoints = [
           ))}
         </ul>
         <aside class="approach-note">
-          <p>Results — followers gained, enquiries generated, and sales influenced — depend on offer quality, market timing, ad budget, content consistency, and factors outside any agency's control. Menace World Tech commits to practical strategy, rigorous execution, and honest reporting. Outcomes are not guaranteed.</p>
+          <p>We'll be honest about what the numbers show, what we don't know yet, and what we think is worth trying next. You'll have clear milestones and a chance to talk through the work with us.</p>
         </aside>
       </div>
     </div>
@@ -118,7 +126,7 @@ const teamPoints = [
       <SectionHeading
         eyebrow="From first contact to ongoing growth"
         title="How every client relationship works"
-        description="A clear process keeps the work focused and makes it easy to see what is happening at every stage."
+        description="You will know what happens next, what we need from you, and how the work connects to your business goals."
       />
       <ProcessSteps steps={processSteps} />
     </div>
@@ -126,9 +134,9 @@ const teamPoints = [
 
   <section class="section section--raised final-cta">
     <div class="container final-cta__inner">
-      <p class="eyebrow">Let's talk</p>
-      <h2>Taking your business to another dimension.</h2>
-      <p>Start with a free growth audit — a short, practical review of your current online presence and a clear conversation about what could make sense next.</p>
+      <p class="eyebrow">Start with clarity</p>
+      <h2>Find the next practical move for your business.</h2>
+      <p>Get a free growth audit: a useful review of your online presence and a straightforward conversation about where a connected system could help.</p>
       <ButtonLink href={auditUrl}>Get a free growth audit</ButtonLink>
     </div>
   </section>
@@ -160,6 +168,23 @@ const teamPoints = [
   .mission__grid {
     display: grid;
     gap: var(--space-6);
+  }
+
+  .manifesto__inner {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-4);
+    max-width: 58rem;
+  }
+
+  .manifesto__inner h2 {
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+  }
+
+  .manifesto__inner > p:last-child {
+    color: var(--color-muted);
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    line-height: 1.8;
   }
 
   .mission__content {

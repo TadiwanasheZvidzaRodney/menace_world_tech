@@ -11,29 +11,29 @@ const callUrl = buildCallUrl();
 const auditSteps = [
   {
     step: '01',
-    title: 'Quick page review',
-    description: 'A fast look at your current social presence and online footprint to identify obvious gaps and practical opportunities.',
+    title: 'Review your customer journey',
+    description: 'We look at your online presence and how an interested customer moves from discovery to enquiry.',
   },
   {
     step: '02',
-    title: '2–3 practical improvements',
-    description: 'Specific, actionable recommendations based on what actually applies to your business — not a generic checklist.',
+    title: 'Find a few useful improvements',
+    description: 'You get practical recommendations tied to your offer and the friction points we can see.',
   },
   {
     step: '03',
-    title: 'A clear next step',
-    description: 'A straightforward conversation about what could make sense going forward. No pressure, no hard sell — just clarity.',
+    title: 'Agree a sensible next step',
+    description: 'We talk through what fits your priorities and budget; you decide whether and when to proceed.',
   },
 ];
 
 const faqItems = [
   {
     q: 'Is the growth audit really free?',
-    a: 'Yes — no strings attached. It is a practical way to start a conversation and make sure there is a real fit before either party commits to anything.',
+    a: 'Yes. It is a practical first conversation to understand your business and identify a useful next step before you commit to anything.',
   },
   {
     q: 'How quickly will you respond?',
-    a: 'Most WhatsApp messages receive a reply within a few hours during working hours. For audit requests, expect an initial response within one business day.',
+    a: 'We handle enquiries during business hours. Share your details and we will follow up through WhatsApp about the next step.',
   },
   {
     q: 'Do I need to have a business page already?',
@@ -41,21 +41,21 @@ const faqItems = [
   },
   {
     q: 'What happens after the audit?',
-    a: 'If the conversation reveals a clear fit, a service proposal or package recommendation is shared. You decide whether to proceed — on your terms and timeline.',
+    a: 'If there is a fit, we will share a clear scope and recommendation. You decide whether and when to proceed.',
   },
 ];
 ---
 
 <BaseLayout
   title="Contact"
-  description="Get a free digital growth audit from Menace World Tech in Zimbabwe. WhatsApp +263 78 3980 802 or fill in the form and we'll respond within one business day."
+  description="Request a free growth audit from Menace World Tech. Get a practical review of your customer journey, clear recommendations, and a straightforward conversation about next steps."
 >
 
   <section class="page-hero section">
     <div class="container">
       <p class="eyebrow">Free growth audit</p>
-      <h1>Let's find your<br /><span class="gradient-text">next opportunity.</span></h1>
-      <p class="page-hero__sub">Start with a free, practical review of your current online presence. No pressure. No jargon. Just a clear conversation about what could make sense for your business.</p>
+      <h1>Find where interested customers <span class="gradient-text">get stuck.</span></h1>
+      <p class="page-hero__sub">Tell us what your business does and where enquiries are slowing down. We will review your online customer journey, share practical improvements, and talk through what could help next.</p>
     </div>
   </section>
 
@@ -70,7 +70,7 @@ const faqItems = [
             </svg>
           </div>
           <div>
-            <p class="cta-block__label">WhatsApp (primary)</p>
+            <p class="cta-block__label">Start on WhatsApp</p>
             <a
               href={auditUrl}
               class="cta-block__number"
@@ -112,14 +112,14 @@ const faqItems = [
         </div>
 
         <aside class="audit-note">
-          <p>The audit delivers clarity and a practical starting point — not a guaranteed outcome. Results from social media marketing vary based on offer, market, budget, and execution.</p>
+          <p>We'll take an honest look at what is working, where customers might be getting stuck, and what you could try next.</p>
         </aside>
       </div>
 
       <div class="contact-form-col">
         <div class="form-header">
-          <h2>Request your free growth audit</h2>
-          <p>Complete the form and we will respond via WhatsApp, usually within one business day. All fields marked <span class="req-marker" aria-label="required">*</span> are required.</p>
+          <h2>Tell us what is getting in the way</h2>
+          <p>Complete the form and we will follow up through WhatsApp about the next step. All fields marked <span class="req-marker" aria-label="required">*</span> are required.</p>
         </div>
         <ContactForm />
       </div>
